@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import Head from 'next/head';
 import * as _ from 'lodash';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/modules/Home.module.css';
 
 import Header from '../components/Header';
 import Main from '../components/Main';
