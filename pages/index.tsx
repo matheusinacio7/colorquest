@@ -17,11 +17,11 @@ export default function Home() {
       <main>
         <Header />
         <Game />
-        <Footer />
+        <Footer style='main' />
       </main>
 
       <Article />
-      <Footer />
+      <Footer style='alt' />
     </Fragment>
   )
 }
