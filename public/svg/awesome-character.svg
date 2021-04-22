@@ -2,7 +2,7 @@
     <defs>
         <style>
             .switch-color-darkest {
-                fill: #9d9d9c;
+                fill: #9d9d9d;
             }
 
             .switch-color-lightest {
