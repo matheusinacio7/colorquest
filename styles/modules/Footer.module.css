@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 10%;
+  color: var(--text-muted);
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
