@@ -1,0 +1,10 @@
+<svg id="fire-icon" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 506.15 736.12">
+    <defs>
+        <style>.cls-1{fill:url(#fire-icon__fill);}</style>
+        <linearGradient id="fire-icon__fill" x1="173.97" y1="147.44" x2="937.8" y2="890.85" gradientUnits="userSpaceOnUse">
+            <stop class="switch-color-lightest sc-gradient" offset="0.3" stop-color="#e9e9e9"/>
+            <stop class="switch-color-darkest sc-gradient" offset="0.86" stop-color="#272727"/>
+        </linearGradient>
+    </defs>
+    <path class="cls-1" d="M428.32,823s22.95,57.39-40.17,47.82S207.62,553,420.77,275.64c0,0,8,55.62,9.87,111.11C413,360.73,581,99.05,703.75,140.2c19.9,6.67-300.3,143.45-32.51,279.26,0,0,80,6.5,48.67-87.39-33.19-99.53,45.05-46.5,75.65,202.15s-22.95,306-51.64,315.6-118.66-65.49-135.8-279.26,9.56,112.86-76.51,128.16-122.42-23-112.86-72.69S319.29,723.58,428.32,823Z" transform="translate(-298.57 -135.82)"/>
+</svg>
