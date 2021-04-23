@@ -89,6 +89,10 @@
   background-color: var(--color-5, var(--text-muted));
 }
 
+.colorPressed {
+  box-shadow: 0 10px 5px rgba(0, 0, 0, 0.25) inset !important;
+}
+
 .colorCorrect {
-  border: 4px dashed var(--dark-grey);
+  filter: drop-shadow(0 0 5px var(--accent-light));
 }

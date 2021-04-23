@@ -1,6 +1,6 @@
 import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faCog ,faRedo, } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 
 export default function Game( props: {className: string} ) {
   const currentlyAvailableGame = true;
@@ -16,7 +16,7 @@ export default function Game( props: {className: string} ) {
         <p>
           <span>Which color is this?</span>
           <span>(130, 70, 90)</span>
-          <span>RGB, Easy</span>
+          <span>RGB, easy</span>
         </p>
         <div className={styles.draw}>
           <button>
@@ -26,7 +26,7 @@ export default function Game( props: {className: string} ) {
       </div>
       <div className={styles.colorGroup}>
         <div>
-          <div className={styles.color1}></div>
+          <div className={`${styles.color1}`}></div>
           <div className={styles.color2}></div>
           <div className={styles.color3}></div>
         </div>
