@@ -1,5 +1,13 @@
 :root {
+  --text-muted: #797979;
+
   --accent-light: #c6c6c6;
   --accent-dark: #4d4d4d;
-  --text-muted: #797979;
+  
+
+  --color-1: rgb(130, 70, 90);
+  --color-2: rgb(130, 150, 90);
+  --color-3: rgb(210, 70, 90);
+  --color-4: rgb(210, 70, 170);
+  --color-5: rgb(130, 150, 170);
 }

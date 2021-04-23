@@ -1,0 +1,89 @@
+.game {
+  display: flex;
+  padding: 16px 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.info p {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.info p span:nth-child(1) {
+  color: var(--text-muted);
+}
+
+.info p span:nth-child(3) {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.info p span:nth-child(2) {
+  font-size: 1.35rem;
+  margin: 8px 0;
+}
+
+.info > div {
+  width: 50px;
+  display: flex;
+}
+
+.info > div > button {
+  background-color: transparent;
+  color: var(--accent-dark);
+  border: none;
+}
+
+.config button {
+  width: 30px;
+  height: 30px;
+}
+
+.draw button {
+  width: 50px;
+  height: 50px;
+}
+
+.colorGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.colorGroup > div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.colorGroup > div > div {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.color1 {
+  background-color: var(--color-1, var(--text-muted));
+}
+
+.color2 {
+  background-color: var(--color-2, var(--text-muted));
+}
+
+.color3 {
+  background-color: var(--color-3, var(--text-muted));
+}
+
+.color4 {
+  background-color: var(--color-4, var(--text-muted));
+}
+
+.color5 {
+  background-color: var(--color-5, var(--text-muted));
+}
