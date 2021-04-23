@@ -1,8 +1,12 @@
+import { useContext } from 'react';
+
 import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
+import { GameContext } from '../../contexts/GameContext';
 
 export default function Game( props: {className: string} ) {
+  const { currentDraw, currentTarget } = useContext(GameContext);
   const currentlyAvailableGame = true;
 
   return (
@@ -15,7 +19,7 @@ export default function Game( props: {className: string} ) {
         </div>
         <p>
           <span>Which color is this?</span>
-          <span>(130, 70, 90)</span>
+          <span>{currentTarget.rgbString}</span>
           <span>RGB, easy</span>
         </p>
         <div className={styles.draw}>
