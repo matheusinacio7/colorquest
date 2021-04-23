@@ -1,0 +1,77 @@
+.info {
+  padding: 0 36px;
+  justify-content: center;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  height: 45px;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.bar {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  background-color: var(--light-grey);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.bar > div {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.currentExp {
+  width: 30%;
+  background-image: linear-gradient(to bottom, var(--accent-light), var(--accent-dark));
+  z-index: 3;
+  transition: width 0.75s ease-in;
+}
+
+.expUp {
+  filter: brightness(1.75);
+  background-image: linear-gradient(var(--accent-dark), var(--accent-light), var(--accent-dark));
+  width: 30%;
+  z-index: 2;
+  transition: width 0.25s ease-in;
+}
+
+.sprite {
+  height: 50px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.levelExp {
+  display: flex;
+  flex-direction: column;
+}
+
+.levelExp > span:last-child {
+  font-size: 0.65rem;
+}
+
+.streak {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.streakIcon {
+  width: 14px;
+}

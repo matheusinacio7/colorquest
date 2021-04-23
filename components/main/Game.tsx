@@ -15,7 +15,7 @@ export default function Game( props: {className: string} ) {
         </div>
         <p>
           <span>Which color is this?</span>
-          <span>(130, 70, 190)</span>
+          <span>(130, 70, 90)</span>
           <span>RGB, Easy</span>
         </p>
         <div className={styles.draw}>

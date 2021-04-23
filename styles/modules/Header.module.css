@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 25%;
+  height: 20%;
   background-image: linear-gradient(to bottom, var(--accent-light), var(--accent-dark));
   background-clip: text;
   -webkit-background-clip: text;

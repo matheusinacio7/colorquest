@@ -66,6 +66,7 @@
   height: 75px;
   width: 75px;
   border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
 .color1 {
@@ -86,4 +87,8 @@
 
 .color5 {
   background-color: var(--color-5, var(--text-muted));
+}
+
+.colorCorrect {
+  border: 4px dashed var(--dark-grey);
 }
