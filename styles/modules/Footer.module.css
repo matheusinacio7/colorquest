@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 10%;
+  font-size: 0.80rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

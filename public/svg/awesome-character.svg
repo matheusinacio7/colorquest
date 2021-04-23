@@ -1,0 +1,35 @@
+<svg id="awesome-character" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 418.51 851.07">
+    <defs>
+        <style>
+            .switch-color-darkest {
+                fill: #9d9d9d;
+            }
+
+            .switch-color-lightest {
+                fill: #c6c6c6;
+            }
+        </style>
+    </defs>
+    <path class="switch-color-darkest"
+        d="M681.12,513.42c0,107.65-56.69,194.92-126.63,194.92S427.87,621.07,427.87,513.42s56.69-148.76,126.62-148.76S681.12,405.77,681.12,513.42Z"
+        transform="translate(-335.04 -119.47)" />
+    <circle class="switch-color-lightest" cx="219.46" cy="126.62" r="126.62" />
+    <ellipse class="switch-color-lightest" cx="418.67" cy="487.55" rx="114.95" ry="30.98"
+        transform="translate(-544.58 503.47) rotate(-61.51)" />
+    <ellipse class="switch-color-lightest" cx="377.86" cy="636.68" rx="115" ry="30.96"
+        transform="translate(-632.43 820.82) rotate(-83.52)" />
+    <circle class="switch-color-lightest" cx="41.18" cy="635.13" r="41.18" />
+    <ellipse class="switch-color-lightest" cx="669.92" cy="474.84" rx="30.98" ry="114.95"
+        transform="translate(-480.41 257.61) rotate(-28.49)" />
+    <ellipse class="switch-color-lightest" cx="710.73" cy="623.97" rx="30.96" ry="115"
+        transform="translate(-400.9 -35.29) rotate(-6.48)" />
+    <ellipse class="switch-color-lightest" cx="491.62" cy="801.08" rx="148.33" ry="37.19"
+        transform="translate(-683.01 1104.12) rotate(-85.18)" />
+    <ellipse class="switch-color-lightest" cx="617.12" cy="796.82" rx="37.19" ry="148.33"
+        transform="translate(-467.24 3.35) rotate(-10.27)" />
+    <circle class="switch-color-lightest" cx="377.34" cy="622.42" r="41.18" />
+    <ellipse class="switch-color-darkest" cx="669.92" cy="943.08" rx="24.64" ry="63.03"
+        transform="translate(-677.91 1382.59) rotate(-83.51)" />
+    <ellipse class="switch-color-darkest" cx="445.25" cy="945.04" rx="63.03" ry="24.64"
+        transform="translate(-439.05 -63.06) rotate(-6.49)" />
+</svg>

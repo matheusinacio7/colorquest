@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+  background-image: linear-gradient(to bottom, var(--accent-light), var(--accent-dark));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.header h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+@media only screen and (min-width: 600px){
+  .header h1 {
+    font-size: 3.25rem;
+  }
+
+  .header h2 {
+    font-size: 1.4rem;
+  }
+}

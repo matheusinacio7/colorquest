@@ -1,0 +1,21 @@
+.flexContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 600px) {
+  .flexContainer {
+    flex-direction: row-reverse;
+  }
+}
+
+.mainSection {
+  background-color: #f2f2f2;
+  flex: 4;
+}
+
+.secondarySection {
+  display: flex;
+  flex: 1;
+}
