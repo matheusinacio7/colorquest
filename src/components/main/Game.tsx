@@ -1,13 +1,32 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { ColorContext } from '../../contexts/ColorContext';
 
+let rootElement;
+
+function getRootElement() {
+  if (rootElement) {
+    return rootElement;
+  }
+
+  rootElement = document.querySelector(':root');
+  return rootElement;
+}
+
 export default function Game( props: {className: string} ) {
-  const { currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
+  const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
   const currentlyAvailableGame = true;
+
+  useEffect(() => {
+    drawNewGame();
+  }, []);
+
+  useEffect(() => {
+    changeStyles(getRootElement());
+  }, [currentTarget]);
 
   return (
     <section className={`${props.className} ${styles.game}`}>
