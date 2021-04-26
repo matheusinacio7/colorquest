@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
-import { GameContext } from '../../contexts/GameContext';
+import { ColorContext } from '../../contexts/ColorContext';
 
 export default function Game( props: {className: string} ) {
-  const { currentDraw, currentTarget, drawNewGame } = useContext(GameContext);
+  const { currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
   const currentlyAvailableGame = true;
 
   return (

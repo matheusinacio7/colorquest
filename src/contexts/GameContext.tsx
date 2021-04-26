@@ -1,28 +1,13 @@
-import { createContext, ReactNode, useState } from 'react';
-import Color from '../classes/Color';
+import { createContext, useState, ReactNode } from 'react';
+import { ColorProvider } from './ColorContext';
 
-interface IGameContext {
-  currentTarget: Color,
-  currentDraw: [Color, Color, Color, Color, Color],
-  drawNewGame: () => void,
-}
-
-export const GameContext = createContext({} as IGameContext);
+export const GameContext = createContext({});
 
 export function GameProvider(props: {children: ReactNode}) {
-  const [target, setTarget] = useState(new Color().beRandom());
-
-  function drawNewGame() {
-    const newTarget = new Color().beRandom();
-    setTarget(newTarget);
-  }
-  
   return (
-  <GameContext.Provider value={{
-    currentTarget: target,
-    currentDraw: [target, target, target, target, target],
-    drawNewGame,
-  }}>
-    {props.children};
+  <GameContext.Provider value={{}}>
+    <ColorProvider>
+      {props.children}
+    </ColorProvider>
   </GameContext.Provider>)
 }
