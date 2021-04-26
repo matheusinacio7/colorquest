@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { ColorContext } from '../../contexts/ColorContext';
 
-let rootElement;
+let rootElement : HTMLElement;
 
 function getRootElement() {
   if (rootElement) {
