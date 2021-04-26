@@ -1,5 +1,6 @@
 import { createContext, useState, ReactNode } from 'react';
 import Color from '../classes/Color';
+import { ColorShift } from '../classes/ColorShift';
 
 interface IColorContext {
   changeStyles: (any) => void,
@@ -14,8 +15,10 @@ export function ColorProvider(props: {children: ReactNode}) {
   const [target, setTarget] = useState(new Color());
   const [draw, setDraw] = useState([new Color(), new Color(), new Color(), new Color(), new Color()]);
 
+  const currentDifficulty = 'easy';
+
   function changeStyles(rootElement : HTMLElement) {
-    rootElement.style.setProperty('--color-1', target.hexString);
+    rootElement.style.setProperty('--color-1', draw[0].hexString);
     rootElement.style.setProperty('--color-2', draw[1].hexString);
     rootElement.style.setProperty('--color-3', draw[2].hexString);
     rootElement.style.setProperty('--color-4', draw[3].hexString);
@@ -26,13 +29,18 @@ export function ColorProvider(props: {children: ReactNode}) {
     const newTarget = new Color().beRandom();
     setTarget(newTarget);
 
+    const testShift = new ColorShift({difficulty: 'easy'}).shift();
+
     setDraw([
-      new Color(...newTarget.rgbArray).shift(-40, -40, -40),
-      new Color(...newTarget.rgbArray).shift(-40, +100, -40),
+      target,
+      new Color(...newTarget.rgbArray).shift(...testShift.shiftArray),
       new Color(...newTarget.rgbArray).shift(-40, -40, -40),
       new Color(...newTarget.rgbArray).shift(-40, -40, -40),
       new Color(...newTarget.rgbArray).shift(-40, -40, -40),
     ]);
+
+    console.log(target.rgbString);
+    console.log(draw[1].rgbString);
   }
 
   return (
