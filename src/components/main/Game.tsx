@@ -6,7 +6,7 @@ import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { GameContext } from '../../contexts/GameContext';
 
 export default function Game( props: {className: string} ) {
-  const { currentDraw, currentTarget } = useContext(GameContext);
+  const { currentDraw, currentTarget, drawNewGame } = useContext(GameContext);
   const currentlyAvailableGame = true;
 
   return (
@@ -23,7 +23,7 @@ export default function Game( props: {className: string} ) {
           <span>RGB, easy</span>
         </p>
         <div className={styles.draw}>
-          <button>
+          <button onClick={drawNewGame}>
             <FontAwesomeIcon icon={currentlyAvailableGame ? faRedo : faArrowRight} size="2x"></FontAwesomeIcon>
           </button>
         </div>
