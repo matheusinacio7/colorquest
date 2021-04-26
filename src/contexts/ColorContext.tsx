@@ -1,6 +1,8 @@
 import { createContext, useState, ReactNode } from 'react';
 import Color from '../classes/Color';
-import { ColorShift } from '../classes/ColorShift';
+import { ColorShiftArray } from '../classes/ColorShift';
+
+import shuffle from '../utils/shuffle';
 
 interface IColorContext {
   changeStyles: (any) => void,
@@ -28,19 +30,19 @@ export function ColorProvider(props: {children: ReactNode}) {
   function drawNewGame() {
     const newTarget = new Color().beRandom();
     setTarget(newTarget);
+    const colorShiftArray = new ColorShiftArray({difficulty: currentDifficulty, originalColor: newTarget.rgbArray});
+    let newDraw = Array<Color>();
 
-    const testShift = new ColorShift({difficulty: 'easy'}).shift();
+    colorShiftArray.shiftArray.forEach(shiftArray => {
+      newDraw.push(new Color(...newTarget.rgbArray).shift(...shiftArray.shift));
+      console.log(shiftArray.shift);
+    });
 
-    setDraw([
-      target,
-      new Color(...newTarget.rgbArray).shift(...testShift.shiftArray),
-      new Color(...newTarget.rgbArray).shift(-40, -40, -40),
-      new Color(...newTarget.rgbArray).shift(-40, -40, -40),
-      new Color(...newTarget.rgbArray).shift(-40, -40, -40),
-    ]);
+    newDraw = shuffle(newDraw);
 
-    console.log(target.rgbString);
-    console.log(draw[1].rgbString);
+    console.log('--------------------');
+
+    setDraw(newDraw);
   }
 
   return (
