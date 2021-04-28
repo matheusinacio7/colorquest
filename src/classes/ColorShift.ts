@@ -7,10 +7,6 @@ const shiftSettings = {
   ultraHard: 5,
 }
 
-function getRandomBinary() : number {
-  return Math.random() < 0.5 ? 0 : 1;
-}
-
 function getRandomDirection() : number {
   return Math.random() < 0.5 ? -1 : 1 ;
 }

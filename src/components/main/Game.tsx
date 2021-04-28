@@ -50,7 +50,7 @@ export default function Game( props: {className: string} ) {
         </div>
         <p>
           <span>Which color is this?</span>
-          <span>{currentTarget.rgbString}</span>
+          <span>{currentTarget.hexString}</span>
           <span>RGB, easy</span>
         </p>
         <div className={styles.draw}>
