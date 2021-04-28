@@ -24,18 +24,24 @@ const difficulties = ['easy', 'medium', 'hard', 'ultraHard'];
 interface IUserContext {
   currentExp: number,
   currentLevel: {level: number, minExp: number, maxExp: number},
+  hasLeveledUp: boolean,
   loseGame: () => void,
-  winGame: () => void,
+  winGame: (HTMLElement) => void,
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export function UserProvider( props: {children: ReactNode} ) {
   const [currentExp, setCurrentExp] = useState(0);
-  const [currentRank, setCurrentRank] = useState(ranks[1]);
-  const [currentLevel, setCurrentLevel] = useState({level: 1, minExp: 0, maxExp: expTable[0].expToNextLevel});
+  const [currentRank, setCurrentRank] = useState(ranks[0]);
+  const [currentLevel, setCurrentLevel] = useState({index: 0, level: 1, minExp: 0, maxExp: expTable[0].expToNextLevel});
+  const [hasLeveledUp, setHasLeveledUp] = useState(false);
 
-  const currentDifficulty = 'ultraHard';
+  const currentDifficulty = 'easy';
+
+  function gainOrLoseExp(expDiff: number) {
+    setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
+  }
 
   function getExp() {
     const gameDifficultyIndex = difficulties.indexOf(currentDifficulty);
@@ -46,12 +52,45 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function loseGame() {
-    setCurrentExp(previous => Math.max(previous - getExp(), currentLevel.minExp));
+    gainOrLoseExp(getExp() * -1);
     console.log('lost');
   }
 
-  function winGame() {
-    setCurrentExp(previous => Math.min(previous + getExp(), currentLevel.maxExp));
+  function levelUp(exceedingExp: number, rootElement: HTMLElement) {
+    const currentLevelIndex = currentLevel.index;
+    const nextLevel = expTable[currentLevelIndex + 1];
+
+    setTimeout(() => {
+      rootElement.style.setProperty('--current-exp-transition', 'none');
+      rootElement.style.setProperty('--exp-up-transition', 'none');
+
+      setCurrentLevel({
+        index: currentLevelIndex + 1,
+        level: nextLevel.level,
+        minExp: currentLevel.maxExp,
+        maxExp: nextLevel.expToNextLevel,
+      });
+
+      setHasLeveledUp(true);
+      setCurrentExp(0);
+    }, 2250);
+
+    setTimeout(() => {
+      rootElement.style.setProperty('--current-exp-transition', 'width 0.75s ease-in');
+      rootElement.style.setProperty('--exp-up-transition', 'width 0.25s ease-in');
+      setHasLeveledUp(false);
+      setCurrentExp(exceedingExp);
+    }, 2300);
+  }
+
+  function winGame(rootElement: HTMLElement) {
+    const exceedingExp = (currentExp + getExp()) - currentLevel.maxExp;
+    gainOrLoseExp(getExp());
+
+    if (exceedingExp > 0) {
+      levelUp(exceedingExp, rootElement);
+    }
+
     console.log('won');
   }
   
@@ -59,6 +98,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     <UserContext.Provider value={{
       currentExp,
       currentLevel,
+      hasLeveledUp,
       loseGame,
       winGame,
     }}>

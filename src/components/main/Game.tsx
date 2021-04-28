@@ -34,7 +34,7 @@ export default function Game( props: {className: string} ) {
     const index = e.target.dataset.index;
 
     if (currentDraw[index].hexString === currentTarget.hexString) {
-      winGame();
+      winGame(rootElement);
     } else {
       loseGame();
     }
