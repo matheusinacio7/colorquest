@@ -28,19 +28,16 @@ export function ColorProvider(props: {children: ReactNode}) {
   }
 
   function drawNewGame() {
-    const newTarget = new Color().beRandom();
+    const newTarget = new Color().beRandom({ban: [242, 242, 242]});
     setTarget(newTarget);
     const colorShiftArray = new ColorShiftArray({difficulty: currentDifficulty, originalColor: newTarget.rgbArray});
     let newDraw = Array<Color>();
 
     colorShiftArray.shiftArray.forEach(shiftArray => {
       newDraw.push(new Color(...newTarget.rgbArray).shift(...shiftArray.shift));
-      console.log(shiftArray.shift);
     });
 
     newDraw = shuffle(newDraw);
-
-    console.log('--------------------');
 
     setDraw(newDraw);
   }

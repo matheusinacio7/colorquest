@@ -22,8 +22,16 @@ export default class Color {
     }
   }
 
-  beRandom() {
+  beRandom(props: {ban?: [number, number, number]}) {
     this.rgbArray = getRandomRgbArray();
+    
+    while (props.ban &&
+      Math.abs(this.rgbArray[0] - props.ban[0]) < 40 &&
+      Math.abs(this.rgbArray[1] - props.ban[1]) < 40 &&
+      Math.abs(this.rgbArray[2] - props.ban[2]) < 40 ) {
+      this.rgbArray = getRandomRgbArray();
+    }
+
     this.buildStrings();
     return this;
   }
