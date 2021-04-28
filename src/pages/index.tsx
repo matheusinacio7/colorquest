@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import Head from 'next/head';
 import * as _ from 'lodash';
 import styles from '../styles/modules/Home.module.css';
@@ -8,6 +8,8 @@ import Main from '../components/Main';
 import Info from '../components/Info';
 import Footer from '../components/Footer';
 import Article from '../components/Article';
+
+import { GameProvider } from '../contexts/GameContext';
 
 export default function Home() {
   const fixMainHeight = (e?) => {
@@ -33,10 +35,14 @@ export default function Home() {
 
       <main>
         <Header />
-        <div className={styles.flexContainer}>
-          <Main className={styles.mainSection} />
-          <Info className={styles.secondarySection} />
-        </div>
+
+        <GameProvider>
+          <div className={styles.flexContainer}>
+            <Main className={styles.mainSection} />
+            <Info className={styles.secondarySection} />
+          </div>
+        </GameProvider>
+        
         <Footer style='main' />
       </main>
 
