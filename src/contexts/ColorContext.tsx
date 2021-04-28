@@ -7,7 +7,7 @@ import shuffle from '../utils/shuffle';
 interface IColorContext {
   changeStyles: (any) => void,
   currentTarget: Color,
-  currentDraw: [Color, Color, Color, Color, Color],
+  currentDraw: Color[],
   drawNewGame: () => void,
 }
 
@@ -46,7 +46,7 @@ export function ColorProvider(props: {children: ReactNode}) {
     <ColorContext.Provider value={{
       changeStyles,
       currentTarget: target,
-      currentDraw: [target, target, target, target, target],
+      currentDraw: draw,
       drawNewGame,
     }}>
       {props.children}

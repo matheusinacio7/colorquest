@@ -44,7 +44,6 @@ export default class Color {
 
   shift(rShift: number, gShift: number, bShift: number) {
     const shiftArray = [rShift, gShift, bShift];
-    console.log(this);
 
     for (let i = 0; i < this.rgbArray.length; i ++) {
       const sum = this.rgbArray[i] + shiftArray[i];

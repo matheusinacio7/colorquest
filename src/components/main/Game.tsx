@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { SyntheticEvent, useContext, useEffect } from 'react';
 
 import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +28,13 @@ export default function Game( props: {className: string} ) {
     changeStyles(getRootElement());
   }, [currentTarget]);
 
+  function logColor(e) {
+    const index = e.target.dataset.index;
+
+    console.log(currentDraw[index]);
+    console.log(currentTarget);
+  }
+
   return (
     <section className={`${props.className} ${styles.game}`}>
       <div className={styles.info}>
@@ -49,13 +56,13 @@ export default function Game( props: {className: string} ) {
       </div>
       <div className={styles.colorGroup}>
         <div>
-          <div className={`${styles.color1}`}></div>
-          <div className={styles.color2}></div>
-          <div className={styles.color3}></div>
+          <div data-index='0' className={styles.color1} onClick={logColor}></div>
+          <div data-index='1' className={styles.color2} onClick={logColor}></div>
+          <div data-index='2' className={styles.color3} onClick={logColor}></div>
         </div>
         <div>
-          <div className={styles.color4}></div>
-          <div className={styles.color5}></div>
+          <div data-index='3' className={styles.color4} onClick={logColor}></div>
+          <div data-index='4' className={styles.color5} onClick={logColor}></div>
         </div>
       </div>
     </section>
