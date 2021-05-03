@@ -33,7 +33,7 @@
   width: 30%;
   background-image: linear-gradient(to bottom, var(--accent-light), var(--accent-dark));
   z-index: 3;
-  transition: width 0.75s ease-in;
+  transition: var(--current-exp-transition);
 }
 
 .expUp {
@@ -41,7 +41,7 @@
   background-image: linear-gradient(var(--accent-dark), var(--accent-light), var(--accent-dark));
   width: 30%;
   z-index: 2;
-  transition: width 0.25s ease-in;
+  transition: var(--exp-up-transition);
 }
 
 .sprite {

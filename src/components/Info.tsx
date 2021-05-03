@@ -5,19 +5,23 @@ import { UserContext } from '../contexts/UserContext';
 import styles from '../styles/modules/Info.module.css';
 
 export default function Info( props: { className:string } ) {
-  const { currentExp, currentLevel } = useContext(UserContext);
+  const { currentExp, currentLevel, hasLeveledUp } = useContext(UserContext);
   const [percentToNextLevel, setPercentToNextLevel] = useState(0);
   const [levelUpExp, setLevelUpExp] = useState(0);
   
-  function expDown(newExp: number, downExp: number) {
+  function expDown(newExp: number) {
     setPercentToNextLevel(newExp);
 
-    setTimeout(() => {
+    if (hasLeveledUp) {
       setLevelUpExp(newExp);
-    }, 1200);
+    } else {
+      setTimeout(() => {
+        setLevelUpExp(newExp);
+      }, 1200);
+    }
   }
 
-  function expUp(newExp: number, upExp: number) {
+  function expUp(newExp: number) {
     setLevelUpExp(newExp);
 
     setTimeout(() => {
@@ -29,11 +33,10 @@ export default function Info( props: { className:string } ) {
     const newPercent = Math.round((currentExp / currentLevel.maxExp) * 10000) / 100;
     
     if (newPercent < percentToNextLevel) {
-      expDown(currentExp, newPercent);
+      expDown(newPercent);
     } else {
-      expUp(currentExp, newPercent);
+      expUp(newPercent);
     }
-
   }, [currentExp]);
 
   return (
