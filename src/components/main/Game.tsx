@@ -4,9 +4,23 @@ import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { ColorContext } from '../../contexts/ColorContext';
+import { GameContext } from '../../contexts/GameContext';
 import { UserContext } from '../../contexts/UserContext';
 
 let rootElement : HTMLElement;
+
+const dictionaries = {
+  difficulty: {
+    'easy': 'Easy',
+    'medium': 'Medium',
+    'hard': 'Hard',
+    'ultraHard': 'Insane',
+  },
+  gameMode: {
+    'rgb': 'RGB',
+    'hex': 'Hex',
+  }
+}
 
 function getRootElement() {
   if (rootElement) {
@@ -19,6 +33,7 @@ function getRootElement() {
 
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
+  const { difficulty, gameMode } = useContext(GameContext);
   const { loseGame, winGame } = useContext(UserContext);
   const currentlyAvailableGame = true;
 
@@ -50,8 +65,8 @@ export default function Game( props: {className: string} ) {
         </div>
         <p>
           <span>Which color is this?</span>
-          <span>{currentTarget.rgbString}</span>
-          <span>RGB, easy</span>
+          <span>{currentTarget[`${gameMode}String`]}</span>
+          <span>{dictionaries.gameMode[gameMode]}, {dictionaries.difficulty[difficulty]}</span>
         </p>
         <div className={styles.draw}>
           <button onClick={drawNewGame}>

@@ -35,9 +35,10 @@ const difficulties = ['easy', 'medium', 'hard', 'ultraHard'];
 interface IUserContext {
   currentExp: number,
   currentLevel: {level: number, minExp: number, maxExp: number},
+  currentStreak: number,
   hasLeveledUp: boolean,
   loseGame: () => void,
-  winGame: (HTMLElement) => void,
+  winGame: (rootElement: HTMLElement) => void,
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -49,16 +50,14 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { gameMode } = useContext(GameContext);
-
-  const currentDifficulty = 'easy';
+  const { difficulty, gameMode } = useContext(GameContext);
 
   function gainOrLoseExp(expDiff: number) {
     setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
   }
 
   function getExp(streak: number) {
-    const gameDifficultyIndex = difficulties.indexOf(currentDifficulty);
+    const gameDifficultyIndex = difficulties.indexOf(difficulty);
     const rankIndex = ranks.indexOf(currentRank);
 
     const difficultyFactor = difficultyExpMultipliers[gameDifficultyIndex - rankIndex];
@@ -67,7 +66,7 @@ export function UserProvider( props: {children: ReactNode} ) {
 
     const expFactor = difficultyFactor * streakFactor * modeFactor;
 
-    return Math.ceil(expByGameDifficulty[currentDifficulty] * expFactor);
+    return Math.ceil(expByGameDifficulty[difficulty] * expFactor);
   }
 
   function loseGame() {
@@ -123,6 +122,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     <UserContext.Provider value={{
       currentExp,
       currentLevel,
+      currentStreak,
       hasLeveledUp,
       loseGame,
       winGame,
