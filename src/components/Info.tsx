@@ -30,7 +30,9 @@ export default function Info( props: { className:string } ) {
   }
 
   useEffect(() => {
-    const newPercent = Math.round((currentExp / currentLevel.maxExp) * 10000) / 100;
+    const progress = currentExp - currentLevel.minExp;
+    const maxProgress = currentLevel.maxExp - currentLevel.minExp;
+    const newPercent = Math.round((progress / maxProgress * 10000) / 100);
     
     if (newPercent < percentToNextLevel) {
       expDown(newPercent);
