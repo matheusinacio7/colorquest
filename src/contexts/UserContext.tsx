@@ -1,5 +1,7 @@
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useContext } from 'react';
 import expTable from '../../assets/expTable.json';
+
+import { GameContext } from '../contexts/GameContext';
 
 const MAX_STREAK = 5;
 
@@ -18,6 +20,11 @@ const difficultyExpMultipliers = {
   '1': 1,
   '2': 1/25,
   '3': 1/25,
+}
+
+const gameModeExpMultipliers = {
+  'rgb': 1,
+  'hex': 1.5,
 }
 
 const streakMultipliers = [1, 1, 1, 1.5, 1.75, 2];
@@ -42,6 +49,8 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
+  const { gameMode } = useContext(GameContext);
+
   const currentDifficulty = 'easy';
 
   function gainOrLoseExp(expDiff: number) {
@@ -54,8 +63,9 @@ export function UserProvider( props: {children: ReactNode} ) {
 
     const difficultyFactor = difficultyExpMultipliers[gameDifficultyIndex - rankIndex];
     const streakFactor = streakMultipliers[streak];
+    const modeFactor = gameModeExpMultipliers[gameMode];
 
-    const expFactor = difficultyFactor * streakFactor;
+    const expFactor = difficultyFactor * streakFactor * modeFactor;
 
     return Math.ceil(expByGameDifficulty[currentDifficulty] * expFactor);
   }
@@ -95,7 +105,7 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function winGame(rootElement: HTMLElement) {
-    const streak = Math.min(currentStreak + 1, 5);
+    const streak = Math.min(currentStreak + 1, MAX_STREAK);
 
     const exceedingExp = (currentExp + getExp(streak)) - currentLevel.maxExp;
     gainOrLoseExp(getExp(streak));
