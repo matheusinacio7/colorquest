@@ -33,12 +33,12 @@ const ranks = ['Peasant', 'Soldier', 'Knight', 'Champion'];
 const difficulties = ['easy', 'medium', 'hard', 'ultraHard'];
 
 interface IUserContext {
-  currentExp: number,
-  currentLevel: {level: number, minExp: number, maxExp: number},
-  currentStreak: number,
-  hasLeveledUp: boolean,
-  loseGame: () => void,
-  winGame: (rootElement: HTMLElement) => void,
+  currentExp: number;
+  currentLevel: {level: number, minExp: number, maxExp: number};
+  currentStreak: number;
+  hasLeveledUp: boolean;
+  loseGame: () => void;
+  winGame: (rootElement: HTMLElement) => void;
 }
 
 export const UserContext = createContext({} as IUserContext);

@@ -5,10 +5,10 @@ import { ColorShiftArray } from '../classes/ColorShift';
 import shuffle from '../utils/shuffle';
 
 interface IColorContext {
-  changeStyles: (any) => void,
-  currentTarget: Color,
-  currentDraw: Color[],
-  drawNewGame: () => void,
+  changeStyles: (any) => void;
+  currentTarget: Color;
+  currentDraw: Color[];
+  drawNewGame: () => void;
 }
 
 export const ColorContext = createContext({} as IColorContext);

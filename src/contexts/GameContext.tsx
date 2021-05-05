@@ -3,17 +3,20 @@ import { ColorProvider } from './ColorContext';
 import { UserProvider } from './UserContext';
 
 interface IGameContext {
-  difficulty: string,
-  changeDifficulty: (newDifficulty: string) => void,
-  gameMode: string,
-  changeGameMode: (newMode: string) => void,
+  difficulty: string;
+  changeDifficulty: (newDifficulty: string) => void;
+  gameMode: string;
+  gameStatus: 'playing'|'won'|'lost';
+  changeGameMode: (newMode: string) => void;
 }
 
 export const GameContext = createContext({} as IGameContext);
 
 export function GameProvider(props: {children: ReactNode}) {
-  const [gameMode, setGameMode] = useState('rgb');
+  const [canPick, setCanPick] = useState(true);
   const [difficulty, setDifficulty] = useState('easy');
+  const [gameMode, setGameMode] = useState('rgb');
+  const [gameStatus, setGameStatus] = useState('playing');
 
   function changeDifficulty(newDifficulty: string) {
     setDifficulty(newDifficulty);
@@ -28,6 +31,7 @@ export function GameProvider(props: {children: ReactNode}) {
     difficulty,
     changeDifficulty,
     gameMode,
+    gameStatus,
     changeGameMode,
   }}>
     <UserProvider>
