@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import expTable from '../../assets/expTable.json';
 
-import { GameContext } from '../contexts/GameContext';
+import { GameContext, GameStatus } from '../contexts/GameContext';
 
 const MAX_STREAK = 5;
 
@@ -37,8 +37,6 @@ interface IUserContext {
   currentLevel: {level: number, minExp: number, maxExp: number};
   currentStreak: number;
   hasLeveledUp: boolean;
-  loseGame: () => void;
-  winGame: () => void;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -50,7 +48,7 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { difficulty, gameMode, rootElement } = useContext(GameContext);
+  const { difficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
 
   function gainOrLoseExp(expDiff: number) {
     setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
@@ -119,17 +117,19 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   useEffect(() => {
-
-  }, []);
+    if (gameStatus === GameStatus.WON) {
+      winGame();
+    } else if (gameStatus === GameStatus.LOST) {
+      loseGame();
+    }
+  }, [gameStatus]);
   
   return(
     <UserContext.Provider value={{
       currentExp,
       currentLevel,
       currentStreak,
-      hasLeveledUp,
-      loseGame,
-      winGame,
+      hasLeveledUp
     }}>
       {props.children}
     </UserContext.Provider>
