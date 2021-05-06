@@ -36,12 +36,14 @@ interface IUserContext {
   currentExp: number;
   currentLevel: {level: number, minExp: number, maxExp: number};
   currentStreak: number;
+  expDelta: number;
   hasLeveledUp: boolean;
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export function UserProvider( props: {children: ReactNode} ) {
+  const [expDelta, setExpDelta] = useState(0);
   const [currentExp, setCurrentExp] = useState(0);
   const [currentRank, setCurrentRank] = useState(ranks[0]);
   const [currentLevel, setCurrentLevel] = useState({index: 0, level: 1, minExp: 0, maxExp: expTable[0].expToNextLevel});
@@ -68,6 +70,7 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function loseGame() {
+    setExpDelta(getExp(0));
     gainOrLoseExp(getExp(0) * -1);
     setStreak(0);
     console.log('lost');
@@ -105,6 +108,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     const streak = Math.min(currentStreak + 1, MAX_STREAK);
 
     const exceedingExp = (currentExp + getExp(streak)) - currentLevel.maxExp;
+    setExpDelta(getExp(streak));
     gainOrLoseExp(getExp(streak));
 
     if (exceedingExp > 0) {
@@ -129,6 +133,7 @@ export function UserProvider( props: {children: ReactNode} ) {
       currentExp,
       currentLevel,
       currentStreak,
+      expDelta,
       hasLeveledUp
     }}>
       {props.children}

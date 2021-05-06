@@ -12,6 +12,7 @@ import { Dictionary, Language } from '../../classes/Dictionary';
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
   const { difficulty, gameMode, gameStatus, changeGameStatus, rootElement, setRootElement } = useContext(GameContext);
+  const { expDelta } = useContext(UserContext);
 
   const [colorCircles, setColorCircles] = useState(null);
   const [colorCircleGroup, setColorCircleGroup] = useState(null);
@@ -94,9 +95,9 @@ export default function Game( props: {className: string} ) {
         case GameStatus.PLAYING:
           return `${dict.gameMode[gameMode]}, ${dict.difficulty[difficulty]}`;
         case GameStatus.WON:
-          return `+ 36 XP`;
+          return `+ ${expDelta} XP`;
         case GameStatus.LOST:
-          return `- 36 XP`;
+          return `- ${expDelta} XP`;
       }
     }
 
