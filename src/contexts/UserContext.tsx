@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import expTable from '../../assets/expTable.json';
 
 import { GameContext } from '../contexts/GameContext';
@@ -38,7 +38,7 @@ interface IUserContext {
   currentStreak: number;
   hasLeveledUp: boolean;
   loseGame: () => void;
-  winGame: (rootElement: HTMLElement) => void;
+  winGame: () => void;
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -50,7 +50,7 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { difficulty, gameMode } = useContext(GameContext);
+  const { difficulty, gameMode, rootElement } = useContext(GameContext);
 
   function gainOrLoseExp(expDiff: number) {
     setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
@@ -75,7 +75,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     console.log('lost');
   }
 
-  function levelUp(exceedingExp: number, rootElement: HTMLElement) {
+  function levelUp(exceedingExp: number) {
     const currentLevelIndex = currentLevel.index;
     const nextLevel = expTable[currentLevelIndex + 1];
     const expFloor = currentLevel.maxExp;
@@ -103,20 +103,24 @@ export function UserProvider( props: {children: ReactNode} ) {
     }, 2300);
   }
 
-  function winGame(rootElement: HTMLElement) {
+  function winGame() {
     const streak = Math.min(currentStreak + 1, MAX_STREAK);
 
     const exceedingExp = (currentExp + getExp(streak)) - currentLevel.maxExp;
     gainOrLoseExp(getExp(streak));
 
     if (exceedingExp > 0) {
-      levelUp(exceedingExp, rootElement);
+      levelUp(exceedingExp);
     }
 
     console.log('won');
 
     setStreak(streak);
   }
+
+  useEffect(() => {
+
+  }, []);
   
   return(
     <UserContext.Provider value={{

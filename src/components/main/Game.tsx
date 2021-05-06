@@ -7,7 +7,7 @@ import { ColorContext } from '../../contexts/ColorContext';
 import { GameContext } from '../../contexts/GameContext';
 import { UserContext } from '../../contexts/UserContext';
 
-let rootElement : HTMLElement;
+let domRootElement : HTMLElement;
 
 const dictionaries = {
   difficulty: {
@@ -22,34 +22,28 @@ const dictionaries = {
   }
 }
 
-function getRootElement() {
-  if (rootElement) {
-    return rootElement;
-  }
-
-  rootElement = document.querySelector(':root');
-  return rootElement;
-}
-
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
-  const { difficulty, gameMode } = useContext(GameContext);
+  const { difficulty, gameMode, rootElement, setRootElement } = useContext(GameContext);
   const { loseGame, winGame } = useContext(UserContext);
   const currentlyAvailableGame = true;
 
   useEffect(() => {
+    setRootElement(document.querySelector(':root'));
     drawNewGame();
   }, []);
 
   useEffect(() => {
-    changeStyles(getRootElement());
+    if (rootElement) {
+      changeStyles();
+    }
   }, [currentTarget]);
 
   function pickColor(e) {
     const index = e.target.dataset.index;
 
     if (currentDraw[index].hexString === currentTarget.hexString) {
-      winGame(rootElement);
+      winGame();
     } else {
       loseGame();
     }
