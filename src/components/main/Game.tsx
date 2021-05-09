@@ -8,11 +8,12 @@ import { GameContext, GameStatus } from '../../contexts/GameContext';
 import { UserContext } from '../../contexts/UserContext';
 
 import { Dictionary, Language } from '../../classes/Dictionary';
+import { ModalType } from 'components/Modal';
 
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
-  const { difficulty, gameMode, gameStatus, changeGameStatus, rootElement, setRootElement } = useContext(GameContext);
-  const { expDelta } = useContext(UserContext);
+  const { difficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement } = useContext(GameContext);
+  const { getExpDelta } = useContext(UserContext);
 
   const [colorCircles, setColorCircles] = useState(null);
   const [colorCircleGroup, setColorCircleGroup] = useState(null);
@@ -70,6 +71,14 @@ export default function Game( props: {className: string} ) {
     }
   }
 
+  function handleRedrawButton() {
+    if (gameStatus !== GameStatus.PLAYING) {
+      drawNewGame();
+      return;
+    }
+    openModal(ModalType.RedrawConfirmation);
+  }
+
   function GameStatusBar() {
     function firstBarContent () {
       if (gameStatus === GameStatus.PLAYING) {
@@ -95,9 +104,9 @@ export default function Game( props: {className: string} ) {
         case GameStatus.PLAYING:
           return `${dict.gameMode[gameMode]}, ${dict.difficulty[difficulty]}`;
         case GameStatus.WON:
-          return `+ ${expDelta} XP`;
+          return `+ ${getExpDelta()} XP`;
         case GameStatus.LOST:
-          return `- ${expDelta} XP`;
+          return `- ${getExpDelta()} XP`;
       }
     }
 
@@ -120,7 +129,7 @@ export default function Game( props: {className: string} ) {
         </div>
         <GameStatusBar />
         <div className={styles.draw}>
-          <button onClick={drawNewGame}>
+          <button onClick={handleRedrawButton}>
             <FontAwesomeIcon icon={gameStatus === GameStatus.PLAYING ? faRedo : faArrowRight} size="2x"></FontAwesomeIcon>
           </button>
         </div>

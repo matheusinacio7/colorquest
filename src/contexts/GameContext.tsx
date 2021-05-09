@@ -2,10 +2,13 @@ import { createContext, useState, ReactNode } from 'react';
 import { ColorProvider } from './ColorContext';
 import { UserProvider } from './UserContext';
 
+import { ModalType } from '../components/Modal';
+
 export enum GameStatus {
   PLAYING,
   WON,
   LOST,
+  FORFEIT,
 }
 
 interface IGameContext {
@@ -17,6 +20,9 @@ interface IGameContext {
   changeGameStatus: (newStatus: GameStatus) => void;
   rootElement: HTMLElement;
   setRootElement: (rootElement: HTMLElement) => void;
+  modalType: ModalType;
+  closeModal: () => void;
+  openModal: (newType: ModalType) => void;
 }
 
 export const GameContext = createContext({} as IGameContext);
@@ -26,6 +32,7 @@ export function GameProvider(props: {children: ReactNode}) {
   const [gameMode, setGameMode] = useState('rgb');
   const [gameStatus, setGameStatus] = useState(GameStatus.PLAYING);
   const [rootElement, setRootElement] = useState(null);
+  const [modalType, setModalType] = useState(ModalType.None);
 
   function changeDifficulty(newDifficulty: string) {
     setDifficulty(newDifficulty);
@@ -39,6 +46,15 @@ export function GameProvider(props: {children: ReactNode}) {
     setGameStatus(newStatus);
   }
 
+  function closeModal() {
+    setModalType(ModalType.None);
+  }
+
+  function openModal(newType: ModalType) {
+    setModalType(newType);
+    console.log(newType);
+  }
+
   return (
   <GameContext.Provider value={{
     difficulty,
@@ -49,11 +65,14 @@ export function GameProvider(props: {children: ReactNode}) {
     gameStatus,
     rootElement,
     setRootElement,
+    modalType,
+    closeModal,
+    openModal,
   }}>
-    <UserProvider>
-      <ColorProvider>
+    <ColorProvider>
+      <UserProvider>
         {props.children}
-      </ColorProvider>
-    </UserProvider>
+      </UserProvider>
+    </ColorProvider>
   </GameContext.Provider>)
 }

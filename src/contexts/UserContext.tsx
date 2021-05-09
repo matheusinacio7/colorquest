@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import expTable from '../../assets/expTable.json';
 
 import { GameContext, GameStatus } from '../contexts/GameContext';
+import { ColorContext } from './ColorContext';
 
 const MAX_STREAK = 5;
 
@@ -36,21 +37,29 @@ interface IUserContext {
   currentExp: number;
   currentLevel: {level: number, minExp: number, maxExp: number};
   currentStreak: number;
-  expDelta: number;
+  getExpDelta: () => number;
   hasLeveledUp: boolean;
 }
 
 export const UserContext = createContext({} as IUserContext);
 
 export function UserProvider( props: {children: ReactNode} ) {
-  const [expDelta, setExpDelta] = useState(0);
   const [currentExp, setCurrentExp] = useState(0);
   const [currentRank, setCurrentRank] = useState(ranks[0]);
   const [currentLevel, setCurrentLevel] = useState({index: 0, level: 1, minExp: 0, maxExp: expTable[0].expToNextLevel});
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { difficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
+  const { changeGameStatus, difficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
+  const { drawNewGame } = useContext(ColorContext);
+
+  function getExpDelta() {
+    if (gameStatus === GameStatus.WON) {
+      return getExp(Math.min(currentStreak + 1, MAX_STREAK));
+    }
+
+    return getExp(0);
+  }
 
   function gainOrLoseExp(expDiff: number) {
     setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
@@ -70,7 +79,6 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function loseGame() {
-    setExpDelta(getExp(0));
     gainOrLoseExp(getExp(0) * -1);
     setStreak(0);
     console.log('lost');
@@ -108,7 +116,6 @@ export function UserProvider( props: {children: ReactNode} ) {
     const streak = Math.min(currentStreak + 1, MAX_STREAK);
 
     const exceedingExp = (currentExp + getExp(streak)) - currentLevel.maxExp;
-    setExpDelta(getExp(streak));
     gainOrLoseExp(getExp(streak));
 
     if (exceedingExp > 0) {
@@ -120,12 +127,22 @@ export function UserProvider( props: {children: ReactNode} ) {
     setStreak(streak);
   }
 
+  function forfeitGame() {
+    loseGame();
+    drawNewGame();
+    changeGameStatus(GameStatus.PLAYING);
+  }
+
   useEffect(() => {
-    if (gameStatus === GameStatus.WON) {
-      winGame();
-    } else if (gameStatus === GameStatus.LOST) {
-      loseGame();
-    }
+    const gameStatusFunctions = {
+      [GameStatus.WON]: winGame,
+      [GameStatus.LOST]: loseGame,
+      [GameStatus.PLAYING]: () => {},
+      [GameStatus.FORFEIT]: forfeitGame,
+    };
+
+    gameStatusFunctions[gameStatus]();
+
   }, [gameStatus]);
   
   return(
@@ -133,7 +150,7 @@ export function UserProvider( props: {children: ReactNode} ) {
       currentExp,
       currentLevel,
       currentStreak,
-      expDelta,
+      getExpDelta,
       hasLeveledUp
     }}>
       {props.children}
