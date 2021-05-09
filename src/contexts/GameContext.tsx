@@ -2,18 +2,37 @@ import { createContext, useState, ReactNode } from 'react';
 import { ColorProvider } from './ColorContext';
 import { UserProvider } from './UserContext';
 
+import { ModalType } from '../components/Modal';
+
+export enum GameStatus {
+  PLAYING,
+  WON,
+  LOST,
+  FORFEIT,
+}
+
 interface IGameContext {
-  difficulty: string,
-  changeDifficulty: (newDifficulty: string) => void,
-  gameMode: string,
-  changeGameMode: (newMode: string) => void,
+  difficulty: string;
+  changeDifficulty: (newDifficulty: string) => void;
+  gameMode: string;
+  changeGameMode: (newMode: string) => void;
+  gameStatus: GameStatus;
+  changeGameStatus: (newStatus: GameStatus) => void;
+  rootElement: HTMLElement;
+  setRootElement: (rootElement: HTMLElement) => void;
+  modalType: ModalType;
+  closeModal: () => void;
+  openModal: (newType: ModalType) => void;
 }
 
 export const GameContext = createContext({} as IGameContext);
 
 export function GameProvider(props: {children: ReactNode}) {
-  const [gameMode, setGameMode] = useState('rgb');
   const [difficulty, setDifficulty] = useState('easy');
+  const [gameMode, setGameMode] = useState('rgb');
+  const [gameStatus, setGameStatus] = useState(GameStatus.PLAYING);
+  const [rootElement, setRootElement] = useState(null);
+  const [modalType, setModalType] = useState(ModalType.None);
 
   function changeDifficulty(newDifficulty: string) {
     setDifficulty(newDifficulty);
@@ -23,17 +42,37 @@ export function GameProvider(props: {children: ReactNode}) {
     setGameMode(newMode);
   }
 
+  function changeGameStatus(newStatus: GameStatus) {
+    setGameStatus(newStatus);
+  }
+
+  function closeModal() {
+    setModalType(ModalType.None);
+  }
+
+  function openModal(newType: ModalType) {
+    setModalType(newType);
+    console.log(newType);
+  }
+
   return (
   <GameContext.Provider value={{
     difficulty,
     changeDifficulty,
     gameMode,
     changeGameMode,
+    changeGameStatus,
+    gameStatus,
+    rootElement,
+    setRootElement,
+    modalType,
+    closeModal,
+    openModal,
   }}>
-    <UserProvider>
-      <ColorProvider>
+    <ColorProvider>
+      <UserProvider>
         {props.children}
-      </ColorProvider>
-    </UserProvider>
+      </UserProvider>
+    </ColorProvider>
   </GameContext.Provider>)
 }

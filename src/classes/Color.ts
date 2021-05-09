@@ -16,7 +16,7 @@ export default class Color {
   hexString: string;
 
   constructor(R?: number, G?: number, B?: number) {
-    if (R && G && B) {
+    if (R !== undefined && G !== undefined && B !== undefined) {
       this.rgbArray = [R, G, B];
       this.buildStrings();
     }
