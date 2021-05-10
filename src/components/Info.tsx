@@ -2,12 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 
 import { UserContext } from '../contexts/UserContext';
 
+import { Dictionary, Language } from '../classes/Dictionary';
+
 import styles from '../styles/modules/Info.module.css';
 
 export default function Info( props: { className:string } ) {
-  const { currentExp, currentLevel, currentStreak, hasLeveledUp } = useContext(UserContext);
+  const { currentExp, currentLevel, currentTitle, currentStreak, hasLeveledUp } = useContext(UserContext);
   const [percentToNextLevel, setPercentToNextLevel] = useState(0);
   const [levelUpExp, setLevelUpExp] = useState(0);
+
+  const dict = new Dictionary(Language.ENGLISH);
   
   function expDown(newExp: number) {
     setPercentToNextLevel(newExp);
@@ -51,7 +55,7 @@ export default function Info( props: { className:string } ) {
         </div>
         <div className={styles.details}>
           <span className={styles.levelExp}>
-            <span>Color Peasant</span>
+            <span>Color {dict.ranks[currentTitle]}</span>
             <span>Level {currentLevel.level}</span>
           </span>
           {currentStreak > 2 ?

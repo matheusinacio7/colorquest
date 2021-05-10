@@ -4,7 +4,7 @@ import styles from '../../styles/modules/Game.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faCog, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { ColorContext } from '../../contexts/ColorContext';
-import { GameContext, GameStatus } from '../../contexts/GameContext';
+import { Difficulty, GameContext, GameStatus } from '../../contexts/GameContext';
 import { UserContext } from '../../contexts/UserContext';
 
 import { Dictionary, Language } from '../../classes/Dictionary';
@@ -12,7 +12,7 @@ import { ModalType } from 'components/Modal';
 
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
-  const { difficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement } = useContext(GameContext);
+  const { currentDifficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement } = useContext(GameContext);
   const { getExpDelta } = useContext(UserContext);
 
   const [colorCircles, setColorCircles] = useState(null);
@@ -102,7 +102,7 @@ export default function Game( props: {className: string} ) {
     function thirdBarContent () {
       switch (gameStatus) {
         case GameStatus.PLAYING:
-          return `${dict.gameMode[gameMode]}, ${dict.difficulty[difficulty]}`;
+          return `${dict.gameMode[gameMode]}, ${dict.difficulty[Difficulty[currentDifficulty]]}`;
         case GameStatus.WON:
           return `+ ${getExpDelta()} XP`;
         case GameStatus.LOST:

@@ -9,11 +9,18 @@ export enum GameStatus {
   WON,
   LOST,
   FORFEIT,
-}
+};
+
+export enum Difficulty {
+  EASY,
+  MEDIUM,
+  HARD,
+  ULTRAHARD,
+};
 
 interface IGameContext {
-  difficulty: string;
-  changeDifficulty: (newDifficulty: string) => void;
+  currentDifficulty: Difficulty;
+  changeDifficulty: (newDifficulty: Difficulty) => void;
   gameMode: string;
   changeGameMode: (newMode: string) => void;
   gameStatus: GameStatus;
@@ -28,13 +35,13 @@ interface IGameContext {
 export const GameContext = createContext({} as IGameContext);
 
 export function GameProvider(props: {children: ReactNode}) {
-  const [difficulty, setDifficulty] = useState('easy');
+  const [currentDifficulty, setDifficulty] = useState(Difficulty.EASY);
   const [gameMode, setGameMode] = useState('rgb');
   const [gameStatus, setGameStatus] = useState(GameStatus.PLAYING);
   const [rootElement, setRootElement] = useState(null);
   const [modalType, setModalType] = useState(ModalType.None);
 
-  function changeDifficulty(newDifficulty: string) {
+  function changeDifficulty(newDifficulty: Difficulty) {
     setDifficulty(newDifficulty);
   }
 
@@ -57,7 +64,7 @@ export function GameProvider(props: {children: ReactNode}) {
 
   return (
   <GameContext.Provider value={{
-    difficulty,
+    currentDifficulty,
     changeDifficulty,
     gameMode,
     changeGameMode,
