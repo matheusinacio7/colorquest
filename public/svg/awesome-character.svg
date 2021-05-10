@@ -2,11 +2,11 @@
     <defs>
         <style>
             .switch-color-darkest {
-                fill: #9d9d9d;
+                fill: var(--accent-dark);
             }
 
             .switch-color-lightest {
-                fill: #c6c6c6;
+                fill: var(--accent-light);
             }
         </style>
     </defs>
