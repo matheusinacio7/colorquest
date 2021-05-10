@@ -5,16 +5,16 @@ export enum Language {
 
 const difficulty = {
   [Language.ENGLISH]: {
-    'easy': 'Easy',
-    'medium': 'Medium',
-    'hard': 'Hard',
-    'ultraHard': 'Insane',
+    'EASY': 'Easy',
+    'MEDIUM': 'Medium',
+    'HARD': 'Hard',
+    'ULTRAHARD': 'Insane',
   },
   [Language.PORTUGUESE]: {
-    'easy': 'Fácil',
-    'medium': 'Médio',
-    'hard': 'Difícil',
-    'ultraHard': 'Insano',
+    'EASY': 'Fácil',
+    'MEDIUM': 'Médio',
+    'HARD': 'Difícil',
+    'ULTRAHARD': 'Insano',
   }
 }
 
@@ -36,12 +36,22 @@ const gameUi = {
   }
 }
 
+const ranks = {
+  [Language.ENGLISH]: {
+    'peasant': 'Peasant',
+    'soldier': 'Soldier',
+    'knight': 'Knight',
+    'champion': 'Champion',
+  }
+}
+
+
 export class Dictionary {
   difficulty: {
-    'easy': string,
-    'medium': string,
-    'hard': string,
-    'ultraHard': string,
+    'EASY': string,
+    'MEDIUM': string,
+    'HARD': string,
+    'ULTRAHARD': string,
   }
   gameMode : {
     'rgb': string,
@@ -52,10 +62,17 @@ export class Dictionary {
     'win': string,
     'lose': string,
   }
+  ranks: {
+    'peasant': string,
+    'soldier': string,
+    'knight': string,
+    'champion': string,
+  }
 
   constructor (language: Language) {
     this.difficulty = difficulty[language];
     this.gameMode = gameMode;
     this.gameUi = gameUi[language];
+    this.ranks = ranks[language];
   }
 }

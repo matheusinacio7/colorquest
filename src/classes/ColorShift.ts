@@ -1,10 +1,11 @@
 import shuffle from '../utils/shuffle';
+import { Difficulty } from '../contexts/GameContext';
 
 const shiftSettings = {
-  easy: 80,
-  medium: 40,
-  hard: 20,
-  ultraHard: 5,
+  [Difficulty.EASY]: 80,
+  [Difficulty.MEDIUM]: 40,
+  [Difficulty.HARD]: 20,
+  [Difficulty.ULTRAHARD]: 5,
 }
 
 function getRandomDirection() : number {
@@ -38,7 +39,7 @@ export class ColorShiftArray {
   shiftArray: ColorShift[] = Array<ColorShift>();
   shouldShifts: number[][];
 
-  constructor(props: {difficulty: string, originalColor: [number, number, number]}) {
+  constructor(props: {difficulty: Difficulty, originalColor: [number, number, number]}) {
     this.shouldShifts = shuffle([...shouldShiftArray]);
     this.shouldShifts.push([0, 0, 0]);
 

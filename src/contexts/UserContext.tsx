@@ -1,16 +1,16 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import expTable from '../../assets/expTable.json';
 
-import { GameContext, GameStatus } from '../contexts/GameContext';
+import { GameContext, GameStatus } from './GameContext';
 import { ColorContext } from './ColorContext';
 
 const MAX_STREAK = 5;
 
 const expByGameDifficulty = {
-  easy: 35,
-  medium: 60,
-  hard: 120,
-  ultraHard: 500,
+  0: 35,
+  1: 60,
+  2: 120,
+  3: 500,
 };
 
 const difficultyExpMultipliers = {
@@ -30,12 +30,41 @@ const gameModeExpMultipliers = {
 
 const streakMultipliers = [1, 1, 1, 1.5, 1.75, 2];
 
-const ranks = ['Peasant', 'Soldier', 'Knight', 'Champion'];
-const difficulties = ['easy', 'medium', 'hard', 'ultraHard'];
+const Ranks = [
+  {
+    title: 'peasant',
+    difficulty: 0,
+    minLevel: 1,
+    maxLevel: 7,
+    index: 0,
+  },
+  {
+    title: 'soldier',
+    difficulty: 1,
+    minLevel: 8,
+    maxLevel: 14,
+    index: 1,
+  },
+  {
+    title: 'knight',
+    difficulty: 2,
+    minLevel: 15,
+    maxLevel: 29,
+    index: 2,
+  },
+  {
+    title: 'champion',
+    difficulty: 3,
+    minLevel: 30,
+    maxLevel: 50,
+    index: 3,
+  },
+];
 
 interface IUserContext {
   currentExp: number;
   currentLevel: {level: number, minExp: number, maxExp: number};
+  currentTitle: string;
   currentStreak: number;
   getExpDelta: () => number;
   hasLeveledUp: boolean;
@@ -45,12 +74,13 @@ export const UserContext = createContext({} as IUserContext);
 
 export function UserProvider( props: {children: ReactNode} ) {
   const [currentExp, setCurrentExp] = useState(0);
-  const [currentRank, setCurrentRank] = useState(ranks[0]);
+  const [currentRank, setCurrentRank] = useState(Ranks[0]);
+  const [currentTitle, setCurrentTitle] = useState(Ranks[0].title);
   const [currentLevel, setCurrentLevel] = useState({index: 0, level: 1, minExp: 0, maxExp: expTable[0].expToNextLevel});
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { changeGameStatus, difficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
+  const { changeGameStatus, currentDifficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
   const { drawNewGame } = useContext(ColorContext);
 
   function getExpDelta() {
@@ -66,16 +96,13 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function getExp(streak: number) {
-    const gameDifficultyIndex = difficulties.indexOf(difficulty);
-    const rankIndex = ranks.indexOf(currentRank);
-
-    const difficultyFactor = difficultyExpMultipliers[gameDifficultyIndex - rankIndex];
+    const difficultyFactor = difficultyExpMultipliers[currentDifficulty - currentRank.difficulty];
     const streakFactor = streakMultipliers[streak];
     const modeFactor = gameModeExpMultipliers[gameMode];
 
     const expFactor = difficultyFactor * streakFactor * modeFactor;
 
-    return Math.ceil(expByGameDifficulty[difficulty] * expFactor);
+    return Math.ceil(expByGameDifficulty[currentDifficulty] * expFactor);
   }
 
   function loseGame() {
@@ -101,6 +128,13 @@ export function UserProvider( props: {children: ReactNode} ) {
       });
 
       setHasLeveledUp(true);
+
+      if (nextLevel.level > currentRank.maxLevel) {
+        const nextRank = Ranks[currentRank.index + 1];
+        setCurrentRank(nextRank);
+        setCurrentTitle(nextRank.title);
+      }
+
       setCurrentExp(expFloor + 1);
     }, 2250);
 
@@ -149,6 +183,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     <UserContext.Provider value={{
       currentExp,
       currentLevel,
+      currentTitle,
       currentStreak,
       getExpDelta,
       hasLeveledUp
