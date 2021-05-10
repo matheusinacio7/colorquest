@@ -62,12 +62,103 @@
   }
 }
 
+.modalCenter {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.modalCenter h1 {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.levelingContainer {
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.levelingContainer > h3 {
+  font-size: 2rem;
+  animation: numberShrink 500ms ease-out forwards;
+}
+
+@keyframes numberShrink {
+  from {
+    transform: scale(1);
+    color: var(--black);
+  }
+
+  to {
+    transform: scale(0.75);
+    color: var(--text-muted);
+  }
+}
+
+.levelingContainer > h2 {
+  font-size: 2rem;
+  transform: scale(0.75);
+  opacity: 0;
+  animation: numberGrow 300ms ease-in 400ms forwards;
+}
+
+@keyframes numberGrow {
+  from {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.arrow {
+  width: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transform: translateX(10%);
+}
+
+.arrowBody {
+  height: 6px;
+  background-color: var(--accent-light);
+  flex-grow: 0;
+  animation: arrowGrow 600ms ease-out 300ms forwards;
+}
+
+@keyframes arrowGrow {
+  from {
+    flex-grow: 0;
+  }
+
+  to {
+    flex-grow: 1;
+  }
+}
+
+.arrowHead {
+  border-left: 12px solid var(--accent-light);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  flex-grow: 0;
+}
+
 .buttonDanger {
   background-color: #e98484;
 }
 
 .buttonSafe {
   background-color: #84e99a;
+}
+
+.buttonContinue {
+  background-color: var(--accent-dark);
+  color: white;
 }
 
 .button:hover {

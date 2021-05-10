@@ -9,6 +9,7 @@
 body {
   font-family: 'Rubik', sans-serif;
   background-color: white;
+  color: var(--black);
 }
 
 a {
