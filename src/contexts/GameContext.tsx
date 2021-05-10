@@ -39,7 +39,7 @@ export function GameProvider(props: {children: ReactNode}) {
   const [gameMode, setGameMode] = useState('rgb');
   const [gameStatus, setGameStatus] = useState(GameStatus.PLAYING);
   const [rootElement, setRootElement] = useState(null);
-  const [modalType, setModalType] = useState(ModalType.RankUp);
+  const [modalType, setModalType] = useState(ModalType.None);
 
   function changeDifficulty(newDifficulty: Difficulty) {
     setDifficulty(newDifficulty);

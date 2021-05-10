@@ -148,6 +148,34 @@
   flex-grow: 0;
 }
 
+.sprite {
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.spriteDown {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: sepia(1);
+  z-index: 8;
+}
+
+.spriteUp {
+  z-index: 9;
+}
+
+.rankUpTitle {
+  justify-content: center;
+  text-align: center;
+}
+
+.rankUpTitle > h1 {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
 .buttonDanger {
   background-color: #e98484;
 }

@@ -135,6 +135,7 @@ export function UserProvider( props: {children: ReactNode} ) {
       if (nextLevel.level > currentRank.maxLevel) {
         const nextRank = Ranks[currentRank.index + 1];
         setCurrentRank(nextRank);
+        openModal(ModalType.RankUp);
         setCurrentTitle(nextRank.title);
       }
 
