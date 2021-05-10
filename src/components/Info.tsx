@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 
 import { UserContext } from '../contexts/UserContext';
 
+import Awesome from '../../public/svg/awesome-character.svg';
+
 import { Dictionary, Language } from '../classes/Dictionary';
 
 import styles from '../styles/modules/Info.module.css';
@@ -47,7 +49,7 @@ export default function Info( props: { className:string } ) {
 
   return (
     <section className={`${props.className} ${styles.info}`}>
-      <img className={styles.sprite} src="./svg/awesome-character.svg" alt="sprite"/>
+      <Awesome />
       <div className={styles.container}>
         <div className={styles.bar}>
           <div className={styles.currentExp} style={{width: `${percentToNextLevel}%`}}></div>
