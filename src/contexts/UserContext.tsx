@@ -4,6 +4,8 @@ import expTable from '../../assets/expTable.json';
 import { GameContext, GameStatus } from './GameContext';
 import { ColorContext } from './ColorContext';
 
+import { ModalType } from '../components/Modal';
+
 const MAX_STREAK = 5;
 
 const expByGameDifficulty = {
@@ -80,12 +82,12 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { changeGameStatus, currentDifficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
+  const { changeGameStatus, openModal, currentDifficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
   const { drawNewGame } = useContext(ColorContext);
 
   function getExpDelta() {
     if (gameStatus === GameStatus.WON) {
-      return getExp(Math.min(currentStreak + 1, MAX_STREAK));
+      return getExp(Math.min(currentStreak, MAX_STREAK));
     }
 
     return getExp(0);
@@ -115,6 +117,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     const currentLevelIndex = currentLevel.index;
     const nextLevel = expTable[currentLevelIndex + 1];
     const expFloor = currentLevel.maxExp;
+    openModal(ModalType.LevelUp);
 
     setTimeout(() => {
       rootElement.style.setProperty('--current-exp-transition', 'none');
@@ -132,6 +135,7 @@ export function UserProvider( props: {children: ReactNode} ) {
       if (nextLevel.level > currentRank.maxLevel) {
         const nextRank = Ranks[currentRank.index + 1];
         setCurrentRank(nextRank);
+        openModal(ModalType.RankUp);
         setCurrentTitle(nextRank.title);
       }
 
