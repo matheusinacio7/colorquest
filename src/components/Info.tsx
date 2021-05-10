@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from 'react';
 
 import { UserContext } from '../contexts/UserContext';
 
+import Streak from '../../assets/svg/streak-icon.svg';
+import Peasant from '../../assets/svg/peasant.svg';
+
 import { Dictionary, Language } from '../classes/Dictionary';
 
 import styles from '../styles/modules/Info.module.css';
@@ -47,7 +50,7 @@ export default function Info( props: { className:string } ) {
 
   return (
     <section className={`${props.className} ${styles.info}`}>
-      <img className={styles.sprite} src="./svg/awesome-character.svg" alt="sprite"/>
+      <Peasant className={`${styles.sprite}`} />
       <div className={styles.container}>
         <div className={styles.bar}>
           <div className={styles.currentExp} style={{width: `${percentToNextLevel}%`}}></div>
@@ -60,7 +63,7 @@ export default function Info( props: { className:string } ) {
           </span>
           {currentStreak > 2 ?
             <span className={styles.streak}>
-              <img className={styles.streakIcon} src="./svg/fire-icon.svg" alt="fire icon"/>
+              <Streak className={styles.streakIcon} />
               <span className={styles.streakCount}>{currentStreak}</span>
             </span>
             :

@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 
 import styles from '../../styles/modules/Modal.module.css';
 
+import Peasant from '../../../assets/svg/peasant.svg';
+
 import { Dictionary, Language } from '../../classes/Dictionary';
 
 export default function RankUp(props: {className: string, closeFunction: () => void}) {
@@ -15,8 +17,7 @@ export default function RankUp(props: {className: string, closeFunction: () => v
       <h1>Rank up!</h1>
 
       <section className={styles.modalCenter}>
-        <img className={`${styles.sprite} ${styles.spriteDown}`} src="./svg/awesome-character.svg" alt="Most awesome sprite ever" />
-        <img className={`${styles.sprite} ${styles.spriteUp}`} src="./svg/awesome-character.svg" alt="Even more awesomeness" />
+        <Peasant className={`${styles.sprite} ${styles.spriteUp}`} />
       </section>
 
       <section className={styles.rankUpTitle}>

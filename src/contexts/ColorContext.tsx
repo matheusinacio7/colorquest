@@ -15,6 +15,17 @@ interface IColorContext {
 
 export const ColorContext = createContext({} as IColorContext);
 
+function getAccents(draw: any[]) {
+  console.log(draw);
+  draw.forEach((draw) => {
+    draw.color.average = Math.round(draw.color.rgbArray.reduce((acc, curr) => acc + curr, 0) / 3);
+  });
+
+  const sorted = draw.sort((a, b) => b.color.average - a.color.average);
+
+  return [sorted[0], sorted[4]];
+}
+
 export function ColorProvider(props: {children: ReactNode}) {
   const [target, setTarget] = useState(new Color());
   const [draw, setDraw] = useState(new Array(5).fill({color: new Color(), isTarget: false}));
@@ -22,6 +33,11 @@ export function ColorProvider(props: {children: ReactNode}) {
   const { currentDifficulty, rootElement } = useContext(GameContext);
 
   function changeStyles() {
+    const accents = getAccents(draw);
+
+    rootElement.style.setProperty('--accent-light', accents[0].color.hexString);
+    rootElement.style.setProperty('--accent-dark', accents[1].color.hexString);
+
     rootElement.style.setProperty('--color-1', draw[0].color.hexString);
     rootElement.style.setProperty('--color-2', draw[1].color.hexString);
     rootElement.style.setProperty('--color-3', draw[2].color.hexString);
