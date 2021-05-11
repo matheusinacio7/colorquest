@@ -1,11 +1,14 @@
-import { Difficulty, GameContext } from 'contexts/GameContext';
 import { useContext, useEffect, useRef, useState } from 'react';
+
+import { Difficulty, GameContext } from 'contexts/GameContext';
+import { UserContext } from 'contexts/UserContext';
 
 import styles from '../styles/modules/Configuration.module.css';
 
 export default function Configuration() {
   const [isClosing, setIsClosing] = useState(false);
   const { setConfigIsOpen, nextConfig, setNextConfig } = useContext(GameContext);
+  const { currentRank } = useContext(UserContext);
   const [currentSelection, setCurrentSelection] = useState({gameMode: null, difficulty: null})
   const difficultyRadio = useRef(new Array<HTMLInputElement>());
   const modeRadio = useRef(new Array<HTMLInputElement>());
@@ -21,6 +24,12 @@ export default function Configuration() {
   useEffect(() => {
     difficultyRadio.current[nextConfig.difficulty].checked = true;
     setCurrentSelection({gameMode: nextConfig.gameMode, difficulty: nextConfig.difficulty});
+
+    for (let i = 0; i < difficultyRadio.current.length; i++) {
+      if (currentRank.index - i < -1) {
+        difficultyRadio.current[i].disabled = true;
+      }
+    }
 
     if (nextConfig.gameMode === 'rgb') {
       modeRadio.current[0].checked = true;

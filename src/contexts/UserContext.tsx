@@ -70,6 +70,7 @@ interface IUserContext {
   currentStreak: number;
   getExpDelta: () => number;
   hasLeveledUp: boolean;
+  currentRank: {title: string, difficulty: number, minLevel: number, maxLevel: number, index: number};
 }
 
 export const UserContext = createContext({} as IUserContext);
@@ -187,8 +188,9 @@ export function UserProvider( props: {children: ReactNode} ) {
     <UserContext.Provider value={{
       currentExp,
       currentLevel,
-      currentTitle,
+      currentRank,
       currentStreak,
+      currentTitle,
       getExpDelta,
       hasLeveledUp
     }}>
