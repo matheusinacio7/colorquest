@@ -1,0 +1,9 @@
+.clearButton {
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  font-style: italic;
+  margin: 12px 0;
+}

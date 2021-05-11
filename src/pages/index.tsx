@@ -9,6 +9,7 @@ import Info from '../components/Info';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import Article from '../components/Article';
+import ClearConfigButton from '../components/ClearConfigButton';
 
 import { GameProvider } from '../contexts/GameContext';
 
@@ -46,9 +47,10 @@ export default function Home() {
           </div>
           <Footer style='main' />
         </main>
-      </GameProvider>
 
-      <Article />
+        <Article />
+        <ClearConfigButton />
+      </GameProvider>
       <Footer style='alt' />
     </Fragment>
   )

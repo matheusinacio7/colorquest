@@ -132,7 +132,8 @@ export function GameProvider(props: {children: ReactNode}) {
   }, [localStorage]);
 
   function clearLocalStorage() {
-    
+    localStorage.clear();
+    window.location.reload();
   }
 
   return (
