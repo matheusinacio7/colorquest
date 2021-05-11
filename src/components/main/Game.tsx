@@ -14,7 +14,7 @@ import { ModalType } from 'components/Modal';
 
 export default function Game( props: {className: string} ) {
   const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
-  const { currentDifficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement } = useContext(GameContext);
+  const { currentDifficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement, setConfigIsOpen } = useContext(GameContext);
   const { getExpDelta } = useContext(UserContext);
 
   const [colorCircles, setColorCircles] = useState(null);
@@ -126,7 +126,7 @@ export default function Game( props: {className: string} ) {
       <div className={styles.info}>
         <div className={styles.config}>
           <button>
-            <ConfigIcon className={`${styles.icon} ${styles.configIcon}`} />
+            <ConfigIcon className={`${styles.icon} ${styles.configIcon}`} onClick={() => setConfigIsOpen(true)} />
           </button>
         </div>
         <GameStatusBar />

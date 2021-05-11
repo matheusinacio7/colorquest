@@ -30,6 +30,11 @@ interface IGameContext {
   modalType: ModalType;
   closeModal: () => void;
   openModal: (newType: ModalType) => void;
+  configIsOpen: boolean;
+  setConfigIsOpen: (newState: boolean) => void;
+  nextConfig: { gameMode: string, difficulty: Difficulty };
+  setNextConfig: (newConfig: {gameMode: string, difficulty: Difficulty}) => void;
+  onDrawNewGame: () => void;
 }
 
 export const GameContext = createContext({} as IGameContext);
@@ -40,6 +45,8 @@ export function GameProvider(props: {children: ReactNode}) {
   const [gameStatus, setGameStatus] = useState(GameStatus.PLAYING);
   const [rootElement, setRootElement] = useState(null);
   const [modalType, setModalType] = useState(ModalType.None);
+  const [configIsOpen, setConfigIsOpen] = useState(false);
+  const [nextConfig, setNextConfig] = useState({gameMode: 'rgb', difficulty: Difficulty.EASY});
 
   function changeDifficulty(newDifficulty: Difficulty) {
     setDifficulty(newDifficulty);
@@ -62,6 +69,11 @@ export function GameProvider(props: {children: ReactNode}) {
     console.log(newType);
   }
 
+  function onDrawNewGame() {
+    setGameMode(nextConfig.gameMode);
+    setDifficulty(nextConfig.difficulty);
+  }
+
   return (
   <GameContext.Provider value={{
     currentDifficulty,
@@ -75,6 +87,11 @@ export function GameProvider(props: {children: ReactNode}) {
     modalType,
     closeModal,
     openModal,
+    configIsOpen,
+    setConfigIsOpen,
+    nextConfig,
+    setNextConfig,
+    onDrawNewGame,
   }}>
     <ColorProvider>
       <UserProvider>
