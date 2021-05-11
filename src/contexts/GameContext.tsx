@@ -74,6 +74,7 @@ interface IGameContext {
   onDrawNewGame: () => void;
   localStorage: Storage;
   setLocalStorage: (localStorage: Storage) => void;
+  clearLocalStorage: () => void;
 }
 
 export const GameContext = createContext({} as IGameContext);
@@ -130,6 +131,10 @@ export function GameProvider(props: {children: ReactNode}) {
     });
   }, [localStorage]);
 
+  function clearLocalStorage() {
+    
+  }
+
   return (
   <GameContext.Provider value={{
     currentDifficulty,
@@ -150,6 +155,7 @@ export function GameProvider(props: {children: ReactNode}) {
     onDrawNewGame,
     localStorage,
     setLocalStorage,
+    clearLocalStorage,
   }}>
     <ColorProvider>
       <UserProvider>
