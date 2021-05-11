@@ -1,0 +1,111 @@
+.config {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 24px 0;
+
+  animation: slideIn 400ms ease-in forwards;
+  transition: transform 400ms;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .15));
+}
+
+.configClosing {
+  animation: slideOut 400ms ease-in forwards;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--accent-dark);
+  padding: 8px 16px;
+  color: white;
+}
+
+.choices {
+  display: flex;
+  align-items: start;
+  flex-grow: 2;
+  gap: 12px;
+  padding: 36px 28px;
+}
+
+.confirmation {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.confirmation button {
+  border: none;
+  padding: 12px 36px;
+  background-color: var(--accent-light);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .20);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.confirmation button:active {
+  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.2) inset;
+}
+
+.confirmation p {
+  font-size: 0.85rem;
+}
+
+.choices > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.choiceLabel {
+  display: flex;
+  gap: 12px;
+  user-select: none;
+}
+
+.choiceLabel h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.choiceLabel h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-100%, -50%);
+  }
+
+  to {
+    transform: translate(0, -50%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translate(0, -50%);
+  }
+
+  to {
+    transform: translate(-100%, -50%);
+  }
+}

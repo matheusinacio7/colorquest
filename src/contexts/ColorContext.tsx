@@ -16,7 +16,6 @@ interface IColorContext {
 export const ColorContext = createContext({} as IColorContext);
 
 function getAccents(draw: any[]) {
-  console.log(draw);
   draw.forEach((draw) => {
     draw.color.average = Math.round(draw.color.rgbArray.reduce((acc, curr) => acc + curr, 0) / 3);
   });
