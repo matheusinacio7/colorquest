@@ -13,8 +13,12 @@ import { Dictionary, Language } from '../../classes/Dictionary';
 import { ModalType } from 'components/Modal';
 
 export default function Game( props: {className: string} ) {
-  const { changeStyles, currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
-  const { currentDifficulty, gameMode, gameStatus, changeGameStatus, openModal, rootElement, setRootElement, setConfigIsOpen } = useContext(GameContext);
+  const { currentDraw, currentTarget, drawNewGame } = useContext(ColorContext);
+  const { currentDifficulty, gameMode, gameStatus,
+    changeGameStatus, openModal, rootElement,
+    setRootElement, setConfigIsOpen,
+    setLocalStorage,
+  } = useContext(GameContext);
   const { getExpDelta } = useContext(UserContext);
 
   const [colorCircles, setColorCircles] = useState(null);
@@ -26,7 +30,8 @@ export default function Game( props: {className: string} ) {
 
   useEffect(() => {
     setRootElement(document.querySelector(':root'));
-    drawNewGame();
+
+    setLocalStorage(localStorage);
 
     const colorElements = document.getElementsByClassName(styles.color);
 
@@ -36,8 +41,6 @@ export default function Game( props: {className: string} ) {
 
   useEffect(() => {
     if (!rootElement) return;
-
-    changeStyles();
     
     if (!currentlyCorrectElement || !currentlyPressedElement || !colorCircleGroup) {
       return;

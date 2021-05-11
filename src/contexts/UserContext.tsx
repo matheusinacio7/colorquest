@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import expTable from '../../assets/expTable.json';
 
-import { GameContext, GameStatus } from './GameContext';
+import { saveConfiguration, getLoadedConfigurations, GameContext, GameStatus } from './GameContext';
 import { ColorContext } from './ColorContext';
 
 import { ModalType } from '../components/Modal';
@@ -83,7 +83,7 @@ export function UserProvider( props: {children: ReactNode} ) {
   const [hasLeveledUp, setHasLeveledUp] = useState(false);
   const [currentStreak, setStreak] = useState(0);
 
-  const { changeGameStatus, openModal, currentDifficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
+  const { changeGameStatus, localStorage, openModal, currentDifficulty, gameMode, gameStatus, rootElement } = useContext(GameContext);
   const { drawNewGame } = useContext(ColorContext);
 
   function getExpDelta() {
@@ -95,7 +95,13 @@ export function UserProvider( props: {children: ReactNode} ) {
   }
 
   function gainOrLoseExp(expDiff: number) {
-    setCurrentExp(previous => Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp));
+    setCurrentExp(previous => {
+      const newExp = Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp);
+      saveConfiguration(localStorage, 'experience', newExp);
+
+      return newExp;
+    });
+    
   }
 
   function getExp(streak: number) {
@@ -124,20 +130,24 @@ export function UserProvider( props: {children: ReactNode} ) {
       rootElement.style.setProperty('--current-exp-transition', 'none');
       rootElement.style.setProperty('--exp-up-transition', 'none');
 
-      setCurrentLevel({
+      const castedLevel = {
         index: currentLevelIndex + 1,
         level: nextLevel.level,
         minExp: currentLevel.maxExp,
         maxExp: nextLevel.expToNextLevel,
-      });
+      }
+
+      setCurrentLevel(castedLevel);
 
       setHasLeveledUp(true);
+      saveConfiguration(localStorage, 'level', castedLevel);
 
       if (nextLevel.level > currentRank.maxLevel) {
         const nextRank = Ranks[currentRank.index + 1];
         setCurrentRank(nextRank);
         openModal(ModalType.RankUp);
         setCurrentTitle(nextRank.title);
+        saveConfiguration(localStorage, 'rank', nextRank);
       }
 
       setCurrentExp(expFloor + 1);
@@ -147,6 +157,7 @@ export function UserProvider( props: {children: ReactNode} ) {
       rootElement.style.setProperty('--current-exp-transition', 'width 0.75s ease-in');
       rootElement.style.setProperty('--exp-up-transition', 'width 0.25s ease-in');
       setHasLeveledUp(false);
+      saveConfiguration(localStorage, 'experience', expFloor + exceedingExp);
       setCurrentExp(expFloor + exceedingExp);
     }, 2300);
   }
@@ -164,6 +175,7 @@ export function UserProvider( props: {children: ReactNode} ) {
     console.log('won');
 
     setStreak(streak);
+    saveConfiguration(localStorage, 'streak', streak);
   }
 
   function forfeitGame() {
@@ -183,6 +195,19 @@ export function UserProvider( props: {children: ReactNode} ) {
     gameStatusFunctions[gameStatus]();
 
   }, [gameStatus]);
+
+  useEffect(() => {
+    if (!localStorage) return;
+
+    const loadedUser = getLoadedConfigurations(localStorage, 'experience', 'level', 'rank', 'streak');
+
+    setCurrentRank(loadedUser.rank);
+    setCurrentTitle(loadedUser.rank.title);
+    setCurrentLevel(loadedUser.level);
+    setCurrentExp(loadedUser.experience);
+    setStreak(loadedUser.streak);
+
+  }, [localStorage])
   
   return(
     <UserContext.Provider value={{

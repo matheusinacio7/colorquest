@@ -9,7 +9,6 @@ import Info from '../components/Info';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import Article from '../components/Article';
-import Configuration from '../components/Configuration';
 
 import { GameProvider } from '../contexts/GameContext';
 
