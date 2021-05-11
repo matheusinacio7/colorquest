@@ -29,7 +29,7 @@ export function ColorProvider(props: {children: ReactNode}) {
   const [target, setTarget] = useState(new Color());
   const [draw, setDraw] = useState(new Array(5).fill({color: new Color(), isTarget: false}));
 
-  const { currentDifficulty, rootElement } = useContext(GameContext);
+  const { onDrawNewGame, rootElement, nextConfig } = useContext(GameContext);
 
   function changeStyles() {
     const accents = getAccents(draw);
@@ -48,7 +48,7 @@ export function ColorProvider(props: {children: ReactNode}) {
     const newTarget = new Color().beRandom({ban: [242, 242, 242]});
     setTarget(newTarget);
 
-    const colorShiftArray = new ColorShiftArray({difficulty: currentDifficulty, originalColor: newTarget.rgbArray});
+    const colorShiftArray = new ColorShiftArray({difficulty: nextConfig.difficulty, originalColor: newTarget.rgbArray});
 
     const newDraw = shuffle(colorShiftArray.shiftArray.map(({shift}) => {
       const color = new Color(...newTarget.rgbArray).shift(...shift);
@@ -59,6 +59,7 @@ export function ColorProvider(props: {children: ReactNode}) {
     }));
 
     setDraw(newDraw);
+    onDrawNewGame();
   }
 
   return (
