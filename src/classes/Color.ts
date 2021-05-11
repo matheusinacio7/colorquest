@@ -14,6 +14,7 @@ export default class Color {
   rgbArray: [number, number, number];
   rgbString: string;
   hexString: string;
+  average?: number;
 
   constructor(R?: number, G?: number, B?: number) {
     if (R !== undefined && G !== undefined && B !== undefined) {
