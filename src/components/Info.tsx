@@ -52,20 +52,18 @@ export default function Info( props: { className:string } ) {
   }, [currentExp]);
 
   useEffect(() => {
-    setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '10px'});
     if (window.innerWidth < 674) {
       setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '10px'});
     } else {
-      setCurrentExpStyle({width: '15px', height: `${percentToNextLevel}%`});
+      setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '20px'});
     }
   }, [percentToNextLevel]);
 
   useEffect(() => {
-    setLevelUpExpStyle({width: `${levelUpExp}%`, height: '10px'});
     if (window.innerWidth < 674) {
       setLevelUpExpStyle({width: `${levelUpExp}%`, height: '10px'});
     } else {
-      setLevelUpExpStyle({width: '15px', height: `${levelUpExp}%`});
+      setLevelUpExpStyle({width: `${levelUpExp}%`, height: '20px'});
     }
   }, [levelUpExp]);
 
@@ -75,7 +73,7 @@ export default function Info( props: { className:string } ) {
 
   return (
     <section className={`${props.className} ${styles.info}`}>
-      <div>
+      <div className={styles.spriteContainer}>
         <Peasant className={`${styles.sprite}`} />
         {currentWindow && currentWindow.innerWidth >= 674 && <span className={styles.levelExp}>
             <span>Color {dict.ranks[currentTitle]}</span>

@@ -18,4 +18,12 @@
   .flexContainer {
     flex-direction: row-reverse;
   }
+
+  .mainSection {
+    flex: 2;
+  }
+
+  .secondarySection {
+    flex: 1;
+  }
 }

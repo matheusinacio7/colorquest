@@ -79,29 +79,25 @@
 @media screen and (min-width: 672px) {
   .info {
     align-items: center;
-    /* flex-direction: column; */
+    flex-direction: column;
+    justify-content: center;
   }
 
   .bar {
-    height: 100%;
-    width: 15px;
     border-radius: 10px;
-    transform: rotate(180deg);
+    height: 20px;
   }
-
-  .currentExp {
-    background-image: linear-gradient(to top, var(--accent-light), var(--accent-dark));
-  }
-
+  
   .bar > div {
     border-radius: 10px;
   }
 
   .container {
-    height: 100%;
+    width: 100%;
     align-items: flex-end;
     flex-direction: row;
     gap: 12px;
+    flex: 0;
   }
 
   .sprite {
