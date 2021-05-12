@@ -38,7 +38,7 @@ function FAQSection(props: {children: ReactNode, title: string}) {
 
 export default function FAQ() {
   return (
-    <article className={styles.faq}>
+    <article id="FAQ" className={styles.faq}>
       <FAQSection title="What's ColorQuest?">
         <p>ColorQuest is a color picking game where your objective is to pick the right color as indicated by the code, be it in RGB or Hex.</p>
         <p>In the future, there will be another game mode where you have to type the code as indicated by the color, and also the HSL code option.</p>
@@ -90,7 +90,7 @@ export default function FAQ() {
       </FAQSection>
       <FAQSection title="Can I contact you?">
         <p>Sure thing! You can find me on <a target="_blank" href="https://www.linkedin.com/in/inaciomatheusdev/">LinkedIn</a> or <a target="_blank" href="https://www.instagram.com/inaciomatheus_/">Instagram.</a></p>
-        <p>If you have any question, suggestion, complaint, compliment or other concern regarding ColorQuest specifically, you can email me at <span style={{textDecoration: 'line-through'}}>contact@colorquest.me</span> (soon)</p>
+        <p>If you have any question, suggestion, complaint, compliment or other concern regarding ColorQuest specifically, you can email me at contact@colorquest.me.</p>
       </FAQSection>
     </article>
   );

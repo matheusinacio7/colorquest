@@ -6,6 +6,7 @@
   height: 10%;
   font-size: 0.80rem;
   color: var(--text-muted);
+  position: relative;
 }
 
 @media screen and (min-width: 960px) {
@@ -22,4 +23,52 @@
 
 .last {
   margin: 22px 0;
+}
+
+.foldIcon {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  cursor: pointer;
+}
+
+.foldIconUp {
+  transform: rotate(180deg);
+  bottom: 24px;
+}
+
+.foldIcon:hover {
+  animation: jump 300ms ease-out 1;
+}
+
+.foldIconUp:hover {
+  animation: jumpReverse 300ms ease-out 1;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(40%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes jumpReverse {
+  0% {
+    transform: rotate(180deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(180deg) translateY(40%);
+  }
+
+  100% {
+    transform: rotate(180deg) translateY(0);
+  }
 }

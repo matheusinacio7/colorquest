@@ -5,6 +5,7 @@ import { UserProvider } from './UserContext';
 import expTable from '../../assets/expTable.json';
 
 import { ModalType } from '../components/Modal';
+import Color from 'classes/Color';
 
 export enum GameStatus {
   PLAYING,
@@ -20,7 +21,19 @@ export enum Difficulty {
   ULTRAHARD,
 };
 
-const DEFAULTS = {
+interface ConfigInterface {
+  difficulty?: Difficulty;
+  draw?: {color: Color, isTarget: boolean}[];
+  target?: Color;
+  gameMode?: string;
+  gameStatus?: GameStatus;
+  level?: {index: number, level: number, minExp: number, maxExp: number};
+  rank?: {title: string, difficulty: Difficulty, minLevel: number, maxLevel: number, index: number};
+  experience?: number;
+  streak?: number;
+}
+
+const DEFAULTS:ConfigInterface = {
   difficulty: Difficulty.EASY,
   draw: null,
   target: null,
@@ -38,8 +51,8 @@ const DEFAULTS = {
   streak: 0,
 }
 
-export function getLoadedConfigurations(localStorage: Storage, ...keys: string[]) {
-  const loadedConfigs:any = {};
+export function getLoadedConfigurations(localStorage: Storage, ...keys: string[]):ConfigInterface {
+  const loadedConfigs:ConfigInterface = {};
 
   keys.forEach((key) => {
     const stored = localStorage.getItem(key);

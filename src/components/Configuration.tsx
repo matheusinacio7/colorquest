@@ -136,7 +136,7 @@ export default function Configuration() {
 
       <section className={styles.confirmation}>
         <button onClick={handleApplySettings}>Apply</button>
-        <p>Changes only apply on the next draw</p>
+        <p>Changes only apply starting on the next draw</p>
       </section>
     </aside>
   )
