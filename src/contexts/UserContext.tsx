@@ -154,8 +154,8 @@ export function UserProvider( props: {children: ReactNode} ) {
     }, 2250);
 
     setTimeout(() => {
-      rootElement.style.setProperty('--current-exp-transition', 'width 0.75s ease-in');
-      rootElement.style.setProperty('--exp-up-transition', 'width 0.25s ease-in');
+      rootElement.style.setProperty('--current-exp-transition', 'all 0.75s ease-in');
+      rootElement.style.setProperty('--exp-up-transition', 'all 0.25s ease-in');
       setHasLeveledUp(false);
       saveConfiguration(localStorage, 'experience', expFloor + exceedingExp);
       setCurrentExp(expFloor + exceedingExp);

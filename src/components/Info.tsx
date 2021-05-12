@@ -13,6 +13,9 @@ export default function Info( props: { className:string } ) {
   const { currentExp, currentLevel, currentTitle, currentStreak, hasLeveledUp } = useContext(UserContext);
   const [percentToNextLevel, setPercentToNextLevel] = useState(0);
   const [levelUpExp, setLevelUpExp] = useState(0);
+  const [levelUpExpStyle, setLevelUpExpStyle] = useState({width: '0px', height: '10px'});
+  const [currentExpStyle, setCurrentExpStyle] = useState({width: '0px', height: '10px'});
+  const [currentWindow, setCurrentWindow] = useState(undefined);
 
   const dict = new Dictionary(Language.ENGLISH);
   
@@ -48,19 +51,47 @@ export default function Info( props: { className:string } ) {
     }
   }, [currentExp]);
 
+  useEffect(() => {
+    setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '10px'});
+    if (window.innerWidth < 674) {
+      setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '10px'});
+    } else {
+      setCurrentExpStyle({width: '15px', height: `${percentToNextLevel}%`});
+    }
+  }, [percentToNextLevel]);
+
+  useEffect(() => {
+    setLevelUpExpStyle({width: `${levelUpExp}%`, height: '10px'});
+    if (window.innerWidth < 674) {
+      setLevelUpExpStyle({width: `${levelUpExp}%`, height: '10px'});
+    } else {
+      setLevelUpExpStyle({width: '15px', height: `${levelUpExp}%`});
+    }
+  }, [levelUpExp]);
+
+  useEffect(() => {
+    setCurrentWindow(window);
+  }, [])
+
   return (
     <section className={`${props.className} ${styles.info}`}>
-      <Peasant className={`${styles.sprite}`} />
-      <div className={styles.container}>
-        <div className={styles.bar}>
-          <div className={styles.currentExp} style={{width: `${percentToNextLevel}%`}}></div>
-          <div className={styles.expUp} style={{width: `${levelUpExp}%`}}></div>
-        </div>
-        <div className={styles.details}>
-          <span className={styles.levelExp}>
+      <div>
+        <Peasant className={`${styles.sprite}`} />
+        {currentWindow && currentWindow.innerWidth >= 674 && <span className={styles.levelExp}>
             <span>Color {dict.ranks[currentTitle]}</span>
             <span>Level {currentLevel.level}</span>
-          </span>
+        </span>}
+      </div>
+      <div className={styles.container}>
+        <div className={styles.bar}>
+          <div className={styles.currentExp} style={currentExpStyle}></div>
+          <div className={styles.expUp} style={levelUpExpStyle}></div>
+        </div>
+        <div className={styles.details}>
+          {currentWindow && currentWindow.innerWidth < 674 && <span className={styles.levelExp}>
+            <span>Color {dict.ranks[currentTitle]}</span>
+            <span>Level {currentLevel.level}</span>
+          </span>}
           {currentStreak > 2 ?
             <span className={styles.streak}>
               <Streak className={styles.streakIcon} />

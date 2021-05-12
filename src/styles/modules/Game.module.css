@@ -49,10 +49,34 @@
 
 .icon {
   width: 35px;
+  cursor: pointer;
 }
 
 .configIcon {
   width: 25px;
+}
+
+@media screen and (min-width: 672px) {
+  .icon {
+    width: 45px;
+  }
+
+  .configIcon {
+    width: 35px;
+  }
+
+  .info p span:nth-child(1) {
+    font-size: 1rem;
+  }
+  
+  .info p span:nth-child(3) {
+    font-size: 1.10rem;
+  }
+  
+  .info p span:nth-child(2) {
+    font-size: 1.75rem;
+    margin: 8px 0;
+  }
 }
 
 .draw button {
@@ -77,6 +101,13 @@
   width: 75px;
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 672px) {
+  .color {
+    width: calc(75px + 3vw);
+    height: calc(75px + 3vw);
+  }
 }
 
 .cantPick .color {
