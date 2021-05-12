@@ -61,16 +61,14 @@ export default function FAQ() {
       </FAQSection>
       <FAQSection title="What are those difficulties?">
         <p>The wrong answers can be off on any 1, 2 or 3 of the three primary colors. The difficulty dictates by how many units they are off.</p>
-        <p>On Easy, that’s 80.</p>
-        <p>On Medium, 40.</p>
-        <p>On Hard, 20.</p>
-        <p>And on Insane, by 5 only.</p>
+        <p>On Easy, that’s 90.</p>
+        <p>On Medium, 50.</p>
+        <p>On Hard, 25.</p>
+        <p>And on Insane, by 10 only.</p>
       </FAQSection>
       <FAQSection title="Why, though?">
         <p>Mostly, for fun.</p>
-
         <p>But if you do art or design, you can definitely find it useful being able to eyeball colors, especially on real life where you usually don’t have an eyedropper tool laying around. ;)</p>
-
         <p>Just like musicians can train their ears to recognize notes, you too can train your eyes to recognize colors.</p>
       </FAQSection>
       <FAQSection title="How do I...">
@@ -92,7 +90,6 @@ export default function FAQ() {
       </FAQSection>
       <FAQSection title="Can I contact you?">
         <p>Sure thing! You can find me on <a target="_blank" href="https://www.linkedin.com/in/inaciomatheusdev/">LinkedIn</a> or <a target="_blank" href="https://www.instagram.com/inaciomatheus_/">Instagram.</a></p>
-
         <p>If you have any question, suggestion, complaint, compliment or other concern regarding ColorQuest specifically, you can email me at <span style={{textDecoration: 'line-through'}}>contact@colorquest.me</span> (soon)</p>
       </FAQSection>
     </article>

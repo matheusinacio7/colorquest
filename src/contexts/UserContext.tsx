@@ -9,10 +9,10 @@ import { ModalType } from '../components/Modal';
 const MAX_STREAK = 5;
 
 const expByGameDifficulty = {
-  0: 35,
-  1: 60,
-  2: 120,
-  3: 500,
+  0: 20,
+  1: 35,
+  2: 60,
+  3: 225,
 };
 
 const difficultyExpMultipliers = {
