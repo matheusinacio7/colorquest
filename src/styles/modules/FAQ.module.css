@@ -12,6 +12,16 @@
   border: 1px solid var(--light-grey);
 }
 
+.section a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  transition: color 200ms ease-in-out;
+}
+
+.section a:hover {
+  color: var(--accent-light);
+}
+
 .section header {
   position: relative;
   border: 1px solid var(--text-muted);
