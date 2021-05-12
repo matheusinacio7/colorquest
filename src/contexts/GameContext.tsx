@@ -23,7 +23,7 @@ export enum Difficulty {
 
 interface ConfigInterface {
   difficulty?: Difficulty;
-  draw?: {color: Color, isTarget: boolean};
+  draw?: {color: Color, isTarget: boolean}[];
   target?: {color: Color, isTarget: boolean};
   gameMode?: string;
   gameStatus?: GameStatus;
