@@ -13,8 +13,8 @@
   --color-4: rgb(210, 70, 170);
   --color-5: rgb(130, 150, 170);
 
-  --current-exp-transition: width 0.75s ease-in;
-  --exp-up-transition: width 0.25s ease-in;
+  --current-exp-transition: all 0.75s ease-in;
+  --exp-up-transition: all 0.25s ease-in;
 }
 
 .switch-color-lightest {

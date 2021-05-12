@@ -57,76 +57,80 @@ export default function Configuration() {
       <section className={styles.choices}>
         <div>
           <h1>Difficulty</h1>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio"
-              name="difficulty"
-              ref={(el) => difficultyRadio.current[0] = el}
-              onChange={() => handleConfigSelection('difficulty', Difficulty.EASY)}
-            />
-            <div>
-              <h2>Easy</h2>
-              <h3>For peasants</h3>
-            </div>
-          </label>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio"
-              name="difficulty"
-              ref={(el) => difficultyRadio.current[1] = el}
-              onChange={() => handleConfigSelection('difficulty', Difficulty.MEDIUM)}
-            />
-            <div>
-              <h2>Medium</h2>
-              <h3>For real soldiers</h3>
-            </div>
-          </label>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio" 
-              name="difficulty"
-              ref={(el) => difficultyRadio.current[2] = el}
-              onChange={() => handleConfigSelection('difficulty', Difficulty.HARD)}
-            />
-            <div>
-              <h2>Hard</h2>
-              <h3>For color knights</h3>
-            </div>
-          </label>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio" 
-              name="difficulty"
-              ref={(el) => difficultyRadio.current[3] = el}
-              onChange={() => handleConfigSelection('difficulty', Difficulty.ULTRAHARD)}
-            />
-            <div>
-              <h2>Insane</h2>
-              <h3>For champs.. or hacks</h3>
-            </div>
-          </label>
+          <div>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="difficulty"
+                ref={(el) => difficultyRadio.current[0] = el}
+                onChange={() => handleConfigSelection('difficulty', Difficulty.EASY)}
+              />
+              <div>
+                <h2>Easy</h2>
+                <h3>For peasants</h3>
+              </div>
+            </label>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="difficulty"
+                ref={(el) => difficultyRadio.current[1] = el}
+                onChange={() => handleConfigSelection('difficulty', Difficulty.MEDIUM)}
+              />
+              <div>
+                <h2>Medium</h2>
+                <h3>For real soldiers</h3>
+              </div>
+            </label>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="difficulty"
+                ref={(el) => difficultyRadio.current[2] = el}
+                onChange={() => handleConfigSelection('difficulty', Difficulty.HARD)}
+              />
+              <div>
+                <h2>Hard</h2>
+                <h3>For color knights</h3>
+              </div>
+            </label>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="difficulty"
+                ref={(el) => difficultyRadio.current[3] = el}
+                onChange={() => handleConfigSelection('difficulty', Difficulty.ULTRAHARD)}
+              />
+              <div>
+                <h2>Insane</h2>
+                <h3>For champs.. or hacks</h3>
+              </div>
+            </label>
+          </div>
         </div>
 
         <div>
           <h1>Mode</h1>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio"
-              name="mode"
-              ref={(el) => modeRadio.current[0] = el}
-              onChange={() => handleConfigSelection('gameMode', 'rgb')}
-            />
-            <h2>RGB</h2>
-          </label>
-          <label className={styles.choiceLabel}>
-            <input
-              type="radio"
-              name="mode"
-              ref={(el) => modeRadio.current[1] = el}
-              onChange={() => handleConfigSelection('gameMode', 'hex')}
-            />
-            <h2>Hex</h2>
-          </label>
+          <div>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="mode"
+                ref={(el) => modeRadio.current[0] = el}
+                onChange={() => handleConfigSelection('gameMode', 'rgb')}
+              />
+              <h2>RGB</h2>
+            </label>
+            <label className={styles.choiceLabel}>
+              <input
+                type="radio"
+                name="mode"
+                ref={(el) => modeRadio.current[1] = el}
+                onChange={() => handleConfigSelection('gameMode', 'hex')}
+              />
+              <h2>Hex</h2>
+            </label>
+          </div>
         </div>
       </section>
 
