@@ -2,10 +2,10 @@ import shuffle from '../utils/shuffle';
 import { Difficulty } from '../contexts/GameContext';
 
 const shiftSettings = {
-  [Difficulty.EASY]: 80,
-  [Difficulty.MEDIUM]: 40,
-  [Difficulty.HARD]: 20,
-  [Difficulty.ULTRAHARD]: 5,
+  [Difficulty.EASY]: 90,
+  [Difficulty.MEDIUM]: 50,
+  [Difficulty.HARD]: 25,
+  [Difficulty.ULTRAHARD]: 10,
 }
 
 function getRandomDirection() : number {
