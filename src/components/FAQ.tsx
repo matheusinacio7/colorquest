@@ -38,7 +38,7 @@ function FAQSection(props: {children: ReactNode, title: string}) {
 
 export default function FAQ() {
   return (
-    <article className={styles.faq}>
+    <article id="FAQ" className={styles.faq}>
       <FAQSection title="What's ColorQuest?">
         <p>ColorQuest is a color picking game where your objective is to pick the right color as indicated by the code, be it in RGB or Hex.</p>
         <p>In the future, there will be another game mode where you have to type the code as indicated by the color, and also the HSL code option.</p>
