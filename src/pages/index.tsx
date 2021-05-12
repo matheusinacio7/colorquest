@@ -8,7 +8,7 @@ import Main from '../components/Main';
 import Info from '../components/Info';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
-import Article from '../components/Article';
+import FAQ from '../components/FAQ';
 import ClearConfigButton from '../components/ClearConfigButton';
 
 import { GameProvider } from '../contexts/GameContext';
@@ -48,7 +48,7 @@ export default function Home() {
           <Footer style='main' />
         </main>
 
-        <Article />
+        <FAQ />
         <ClearConfigButton />
       </GameProvider>
       <Footer style='alt' />
