@@ -2,7 +2,7 @@
   display: flex;
   padding: 16px 0;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .info {
@@ -83,6 +83,21 @@
   }
 }
 
+@media screen and (min-width: 1080px) {
+  .info p span:nth-child(1) {
+    font-size: 1.15rem;
+  }
+  
+  .info p span:nth-child(3) {
+    font-size: 1.15rem;
+  }
+  
+  .info p span:nth-child(2) {
+    font-size: 1.9rem;
+    margin: 8px 0;
+  }
+}
+
 .draw button {
   width: 50px;
   height: 50px;
@@ -144,4 +159,5 @@
 
 .colorCorrect {
   filter: drop-shadow(0 0 10px var(--accent-light));
+  border: 3px solid var(--accent-light);
 }

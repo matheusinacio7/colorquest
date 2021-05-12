@@ -25,6 +25,7 @@ export default function Game( props: {className: string} ) {
   const [colorCircleGroup, setColorCircleGroup] = useState(null);
   const [currentlyPressedElement, setCurrentlyPressedElement] = useState(null);
   const [currentlyCorrectElement, setCurrentlyCorrectElement] = useState(null);
+  const [currentWindow, setCurrentWindow] = useState(undefined);
   
   const dict = new Dictionary(Language.ENGLISH);
 
@@ -32,6 +33,7 @@ export default function Game( props: {className: string} ) {
     setRootElement(document.querySelector(':root'));
 
     setLocalStorage(localStorage);
+    setCurrentWindow(window);
 
     const colorElements = document.getElementsByClassName(styles.color);
 
@@ -127,17 +129,19 @@ export default function Game( props: {className: string} ) {
   return (
     <section className={`${props.className} ${styles.game}`}>
       <div className={styles.info}>
+        { currentWindow && currentWindow.innerWidth < 1080 &&
         <div className={styles.config}>
           <button>
             <ConfigIcon className={`${styles.icon} ${styles.configIcon}`} onClick={() => setConfigIsOpen(true)} />
           </button>
-        </div>
+        </div>}
         <GameStatusBar />
+        { currentWindow && currentWindow.innerWidth < 1080 &&
         <div className={styles.draw}>
           <button onClick={handleRedrawButton}>
             {gameStatus === GameStatus.PLAYING ? <RedrawIcon className={styles.icon} /> : <NextIcon className={styles.icon} />}
           </button>
-        </div>
+        </div>}
       </div>
       <div className={styles.colorGroup}>
         <div>
@@ -150,6 +154,7 @@ export default function Game( props: {className: string} ) {
           <div data-index='4' className={`${styles.color5} ${styles.color}`}  onClick={pickColor}></div>
         </div>
       </div>
+      <div></div>
     </section>
   );
 }

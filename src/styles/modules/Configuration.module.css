@@ -1,6 +1,7 @@
 .config {
   position: absolute;
   top: 50%;
+  left: 0;
   width: 100%;
   height: 70%;
   display: flex;
@@ -30,6 +31,7 @@
   background-color: var(--accent-dark);
   padding: 8px 16px;
   color: white;
+  cursor: pointer;
 }
 
 .choices {
@@ -66,17 +68,60 @@
   font-size: 0.85rem;
 }
 
-.choices > div {
+.choices > div > div {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 12px;
 }
 
+@media screen and (min-width: 674px) {
+  .choices {
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .choices h1 {
+    font-size: 1.5rem;
+  }
+
+  .choices > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .choices > div > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .confirmation button {
+    font-size: 1.25rem;
+    padding: 18px 56px;
+  }
+
+  .confirmation p {
+    font-size: 1rem;
+  }
+}
+
+
 .choiceLabel {
   display: flex;
   gap: 12px;
   user-select: none;
+  cursor: pointer;
+}
+
+.choiceLabel input {
+  cursor: pointer;
 }
 
 .choiceLabel h2 {
@@ -113,5 +158,12 @@
 
   to {
     transform: translate(-100%, -50%);
+  }
+}
+
+
+@media screen and (min-width: 1080px) {
+  .config {
+    width: 40%;
   }
 }

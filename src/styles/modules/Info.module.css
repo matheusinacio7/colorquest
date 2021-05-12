@@ -3,6 +3,7 @@
   justify-content: center;
   gap: 16px;
   align-items: flex-end;
+  position: relative;
 }
 
 .container {
@@ -70,6 +71,7 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  user-select: none;
 }
 
 .streakIcon {
@@ -80,14 +82,15 @@
   .info {
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: 48px;
   }
 
   .bar {
     border-radius: 10px;
     height: 20px;
   }
-  
+
   .bar > div {
     border-radius: 10px;
   }
@@ -122,5 +125,69 @@
   .details {
     font-size: 1rem;
     align-items: flex-end;
+  }
+}
+
+.desktopButtonContainer {
+  display: none;
+}
+
+.configIcon {
+  visibility: hidden;
+  position: absolute;
+}
+
+@media screen and (min-width: 1080px) {
+  .desktopButtonContainer {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .desktopButtonContainer > button {
+    width: 120px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background-color: var(--light-grey);
+    border: none;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 200ms;
+  }
+
+  .desktopButtonContainer > button > svg {
+    transition: filter 150ms;
+  }
+
+  .desktopButtonContainer > button:hover > svg {
+    filter: drop-shadow(0 0 3px var(--accent-light));
+  }
+
+  .desktopButtonContainer > button:hover {
+    background-color: #c9c9c9;
+  }
+
+  .desktopButtonContainer > button:disabled {
+    cursor: not-allowed;
+    background-color: var(--light-grey);
+  }
+
+  .desktopButtonContainer > button:disabled > svg {
+    filter: grayscale(1);
+  }
+
+  .configIcon {
+    visibility: visible;
+    width: 48px;
+    top: 0;
+    left: 36px;
+    transform: rotate(0);
+    transition: transform 1000ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .configIcon:hover {
+    transform: rotate(360deg);
   }
 }
