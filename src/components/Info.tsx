@@ -21,8 +21,6 @@ export default function Info( props: { className:string } ) {
   const { drawNewGame } = useContext(ColorContext);
   const [percentToNextLevel, setPercentToNextLevel] = useState(0);
   const [levelUpExp, setLevelUpExp] = useState(0);
-  const [levelUpExpStyle, setLevelUpExpStyle] = useState({width: '0px', height: '10px'});
-  const [currentExpStyle, setCurrentExpStyle] = useState({width: '0px', height: '10px'});
   const [currentWindow, setCurrentWindow] = useState(undefined);
 
   const dict = new Dictionary(Language.ENGLISH);
@@ -69,22 +67,6 @@ export default function Info( props: { className:string } ) {
   }, [currentExp]);
 
   useEffect(() => {
-    if (window.innerWidth < 674) {
-      setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '10px'});
-    } else {
-      setCurrentExpStyle({width: `${percentToNextLevel}%`, height: '20px'});
-    }
-  }, [percentToNextLevel]);
-
-  useEffect(() => {
-    if (window.innerWidth < 674) {
-      setLevelUpExpStyle({width: `${levelUpExp}%`, height: '10px'});
-    } else {
-      setLevelUpExpStyle({width: `${levelUpExp}%`, height: '20px'});
-    }
-  }, [levelUpExp]);
-
-  useEffect(() => {
     setCurrentWindow(window);
   }, []);
 
@@ -100,8 +82,8 @@ export default function Info( props: { className:string } ) {
       </div>
       <div className={styles.container}>
         <div className={styles.bar}>
-          <div className={styles.currentExp} style={currentExpStyle}></div>
-          <div className={styles.expUp} style={levelUpExpStyle}></div>
+          <div className={styles.currentExp} style={{width: `${percentToNextLevel}%`}}></div>
+          <div className={styles.expUp} style={{width: `${levelUpExp}%`}}></div>
         </div>
         <div className={styles.details}>
           {currentWindow && currentWindow.innerWidth < 674 && <span className={styles.levelExp}>
