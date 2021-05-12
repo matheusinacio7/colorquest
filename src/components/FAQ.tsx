@@ -7,6 +7,7 @@ import DownArrow from '../../assets/svg/down-arrow.svg';
 function FAQSection(props: {children: ReactNode, title: string}) {
   const [isOpen, setIsOpen] = useState(false);
   const expansible = useRef<HTMLDivElement>(null);
+  const header = useRef<HTMLElement>(null);
 
   function handleToggleOpen() {
     if (!isOpen) {
@@ -14,7 +15,7 @@ function FAQSection(props: {children: ReactNode, title: string}) {
       expansible.current.style.maxHeight = `${expansible.current.scrollHeight + 12}px`;
 
       setTimeout(() => {
-        expansible.current.scrollIntoView({behavior: 'smooth'});
+        header.current.scrollIntoView({behavior: 'smooth'});
       }, 200);
     } else {
       setIsOpen(false);
@@ -24,7 +25,7 @@ function FAQSection(props: {children: ReactNode, title: string}) {
 
   return (
     <section className={styles.section}>
-      <header onClick={handleToggleOpen}>
+      <header ref={header} onClick={handleToggleOpen}>
         <h1>{props.title}</h1>
         <DownArrow className={isOpen ? styles.flip : null} />
       </header>
