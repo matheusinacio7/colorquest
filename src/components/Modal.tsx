@@ -41,7 +41,7 @@ export default function Modal() {
 
   return (
     <Fragment>
-      <ModalWindow className={`${styles.window} ${modalType !== ModalType.None ? styles.visible : null}`} type={modalType} />
+      <ModalWindow className={`${styles.window}`} type={modalType} />
 
       {modalType !== ModalType.None && <div className={styles.backdrop}></div>}
     </Fragment>
