@@ -17,23 +17,33 @@ export enum ModalType {
 
 export default function Modal() {
   const { changeGameStatus, closeModal, modalType } = useContext(GameContext);
+  const [fading, setFading] = useState(false);
 
   function forfeitGame() {
     changeGameStatus(GameStatus.FORFEIT);
     closeModal();
   }
 
+  function fadeAway() {
+    setFading(true);
+
+    setTimeout(() => {
+      closeModal();
+      setFading(false);
+    }, 110);
+  }
+
   function ModalWindow(props: {className: string, type: ModalType}) {
     if (props.type === ModalType.RedrawConfirmation) {
-      return <Redraw className={props.className} closeFunction={closeModal} forfeitFunction={forfeitGame} />;
+      return <Redraw className={props.className} closeFunction={fadeAway} forfeitFunction={forfeitGame} />;
     }
 
     if (props.type === ModalType.LevelUp) {
-      return <LevelUp className={props.className} closeFunction={closeModal} />;
+      return <LevelUp className={props.className} closeFunction={fadeAway} />;
     }
 
     if (props.type === ModalType.RankUp) {
-      return <RankUp className={props.className} closeFunction={closeModal} />;
+      return <RankUp className={props.className} closeFunction={fadeAway} />;
     }
 
     return null;
@@ -41,7 +51,7 @@ export default function Modal() {
 
   return (
     <Fragment>
-      <ModalWindow className={`${styles.window} ${modalType !== ModalType.None ? styles.visible : null}`} type={modalType} />
+      <ModalWindow className={`${styles.window} ${fading ? styles.windowFade : null} `} type={modalType} />
 
       {modalType !== ModalType.None && <div className={styles.backdrop}></div>}
     </Fragment>
