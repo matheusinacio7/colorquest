@@ -93,7 +93,7 @@ export function UserProvider( props: {children: ReactNode} ) {
 
     return getExp(0);
   }
-
+  
   function gainOrLoseExp(expDiff: number) {
     setCurrentExp(previous => {
       const newExp = Math.max(Math.min(previous + expDiff, currentLevel.maxExp), currentLevel.minExp);
