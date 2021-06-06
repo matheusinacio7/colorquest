@@ -34,6 +34,7 @@ export default function Home() {
     <Fragment>
       <Head>
         <title>ColorQuest</title>
+        <meta name="description" content="ColorQuest is a color guessing game for you to practice your color eye-balling skills." />
       </Head>
 
       <GameProvider>
