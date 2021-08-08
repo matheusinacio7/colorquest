@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ColorQuest
 
-## Getting Started
+ColorQuest is a color guessing game where you are presented with a code (RGB or Hex) and five choices that are close to each other, then you have to guess which one is the correct.
 
-First, run the development server:
+You can try it out at https://colorquest.me :)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+It's super fun! (and harder than I initially thought it would be lol)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<image align="center" width="300px" src="./preview/screenshot_main_screen_01.png" alt="screenshot from the game">
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
+## Tech and stuff
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+The game was created solo by me over the course of a few weeks.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+It uses NextJS and TypeScript as the main techs, and good ol' CSS Modules for the styles.
 
-## Learn More
+It has _very few_ dependencies, as I tried to do most of the things by hand in order to hone my skills.
 
-To learn more about Next.js, take a look at the following resources:
+You can check out the initial wireframe I created [here at this Figma](https://www.figma.com/file/iqWo480mxhnz6VUg7MeIpZ/ColorQuest?node-id=0%3A1) and also the leveling curve calculation on [this spreadsheet](https://docs.google.com/spreadsheets/d/1Wpol2O7mj9zzlGUmCkd9_iWpoKJK45qvUaX1wRT2voY/edit?usp=sharing).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Hey! Thanks for your interest in contributing to the project :D
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can find out more on how to do this on the [contributing file](./CONTRIBUTING.md);
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+## License
+
+This is an open source project :D you can use anything here as long as you keep it open, as per MIT's legendary license.
+
+You can read the full (which is not really that long) license on the [license file](./LICENSE.md).
